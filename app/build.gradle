@@ -50,6 +50,8 @@ android {
 }
 
 dependencies {
+    implementation 'androidx.core:core-ktx:+'
+
 
     // RoomDB dependencies
     def room_version = "2.5.0"
