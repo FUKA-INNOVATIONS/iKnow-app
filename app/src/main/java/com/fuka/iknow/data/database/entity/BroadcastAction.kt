@@ -9,5 +9,5 @@ data class BroadcastAction(
     val id: Long,
     val value: String,
     val type: String,
-    val timestamp: Long
+    val timestamp: String
 )

@@ -12,13 +12,13 @@ import com.fuka.iknow.data.database.entity.BroadcastAction
 @Database(entities = [BroadcastAction::class], version = 2, exportSchema = false)
 @TypeConverters(DateTypeConverter::class)
 abstract class iKnowDatabase : RoomDatabase() {
-    abstract fun broadcastActionDao(): BroadcastActionDao
+    abstract val iKnowDao: BroadcastActionDao
 
     companion object {
         @Volatile
         private var INSTANCE: iKnowDatabase? = null
 
-        fun get_iKnowDatabase(context: Context): iKnowDatabase? {
+        fun get_iKnowDatabase(context: Context): iKnowDatabase {
             synchronized(iKnowDatabase::class) {
                 var instance = INSTANCE
                 if (instance == null) {

@@ -5,12 +5,12 @@ import java.util.Date
 
 class DateTypeConverter {
     @TypeConverter
-    suspend fun fromTimestamp(value: Long?): Date? {
+    fun fromTimestamp(value: Long?): Date? {
         return if (value == null) null else Date(value)
     }
 
     @TypeConverter
-    suspend fun dateToTimestamp(date: Date?): Long? {
+    fun dateToTimestamp(date: Date?): Long? {
         return date?.time
     }
 }

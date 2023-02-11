@@ -16,11 +16,11 @@ interface BroadcastActionDao {
     suspend fun deleteBroadcastAction(broadcastAction: BroadcastAction)
 
     @Query("SELECT * FROM BroadcastAction WHERE id == :id")
-    suspend fun getBroadcastActionByID(id: Long): LiveData<BroadcastAction>
+    fun getBroadcastActionByID(id: Long): LiveData<BroadcastAction>
 
     @Query("SELECT * FROM BroadcastAction WHERE type == :type")
-    suspend fun getBroadcastActionsByType(type: String): LiveData<List<BroadcastAction>>
+    fun getBroadcastActionsByType(type: String): LiveData<List<BroadcastAction>>
 
     @Query("SELECT * FROM BroadcastAction")
-    suspend fun getBroadcastActions(): LiveData<List<BroadcastAction>>
+    fun getBroadcastActions(): LiveData<List<BroadcastAction>>
 }
