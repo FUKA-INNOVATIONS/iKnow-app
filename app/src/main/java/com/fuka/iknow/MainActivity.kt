@@ -1,6 +1,5 @@
 package com.fuka.iknow
 
-import android.app.Application
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -15,57 +14,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.*
-import com.fuka.iknow.data.database.dataBase.iKnowDatabase
-import com.fuka.iknow.data.database.entity.BroadcastAction
 import com.fuka.iknow.ui.theme.IKnowTheme
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import java.time.Instant
-import java.time.ZoneOffset
-import java.time.format.DateTimeFormatter.ofPattern
+import com.fuka.iknow.viewModels.DatabaseViewModel
 import java.util.*
-
-class iKnowViewModel (application: Application) : AndroidViewModel(application) {
-    private val db = iKnowDatabase.get_iKnowDatabase(application)
-
-    fun getBroadcastActions() : LiveData<List<BroadcastAction>> {
-        val allBroadcastActions = db.iKnowDao.getBroadcastActions()
-        return allBroadcastActions
-    }
-
-    fun addBroadcastAction(broadcastAction: BroadcastAction) {
-        viewModelScope.launch (Dispatchers.IO) {
-            db.iKnowDao.insertOrUpdateBroadcastAction(broadcastAction)
-        }
-    }
-
-    fun addFiveBroadcastActions() {
-        var timestamp: String
-
-        viewModelScope.launch (Dispatchers.IO) {
-
-            for (i in 1..5) {
-                timestamp = ofPattern("dd-MM-yyyy HH:mm:ss.SSSSSS")
-                    .withZone(ZoneOffset.UTC)
-                    .format(Instant.now())
-
-                db.iKnowDao.insertOrUpdateBroadcastAction(
-                    BroadcastAction(
-                        0,
-                        "Video captured",
-                        "Camera",
-                        timestamp
-                    )
-                )
-            }
-        }
-    }
-}
-
 
 
 class MainActivity : ComponentActivity() {
-    val viewModel: iKnowViewModel by viewModels()
+    val viewModel: DatabaseViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -74,8 +29,9 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+
 @Composable
-fun MainAppNav(viewModel: iKnowViewModel) {
+fun MainAppNav(viewModel: DatabaseViewModel) {
     IKnowTheme {
         // A surface container using the 'background' color from the theme
         Surface(
@@ -90,7 +46,7 @@ fun MainAppNav(viewModel: iKnowViewModel) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AppBody(viewModel: iKnowViewModel) {
+fun AppBody(viewModel: DatabaseViewModel) {
     val broadcastActionList = viewModel.getBroadcastActions().observeAsState(listOf())
 
     Scaffold(
@@ -111,10 +67,33 @@ fun AppBody(viewModel: iKnowViewModel) {
             ) {
                 items(broadcastActionList.value) {
                     // Content here
-                    Text(text = "testiteksti 123454321")
-                    Text("BroadcastAction: ${it.type}")
+
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        modifier = Modifier
+                            .fillMaxHeight()
+                            .fillMaxWidth()
+                            .padding(padding)
+                    ) {
+                        Card(Modifier.size(width = 300.dp, height = 110.dp)) {
+                            Text(
+                                text = "Type: ${it.type}",
+                                // style = ...
+                            )
+                            Text(
+                                text = "Value: ${it.value}",
+                                // style = ...
+                            )
+                            Text(
+                                text = "Time recorded: ${it.timestamp}"
+                                // style = ...
+                            )
+                        }
+                    }
                 }
             }
+
+            // Floating action button
             Column(
                 horizontalAlignment = Alignment.End,
                 verticalArrangement = Arrangement.Bottom,
@@ -124,11 +103,11 @@ fun AppBody(viewModel: iKnowViewModel) {
                     .padding(padding)
             ) {
                 FloatingActionButton(
-                    onClick = { viewModel.addFiveBroadcastActions() },
+                    onClick = { viewModel.addBroadcastActions() },
                     modifier = Modifier
                         .padding(all = 15.dp)
                 ) {
-                    Text("Add five more!")
+                    Text("Add more!")
                 }
             }
         }
