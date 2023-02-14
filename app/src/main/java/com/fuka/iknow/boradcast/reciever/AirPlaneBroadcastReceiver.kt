@@ -3,6 +3,7 @@ package com.fuka.iknow.boradcast.reciever
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.util.Log
 import android.widget.Toast
 
@@ -10,6 +11,10 @@ val TAG = "iKnow-app"
 class AirPlaneBroadcastReceiver: BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
+
+        //val filter = IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED)
+        //context.registerReceiver(this, filter)
+
         Log.d(TAG, "intent: $intent")
         Log.d(TAG, "intent extras: ${intent.extras}")
         Log.d(TAG, "context: $context")

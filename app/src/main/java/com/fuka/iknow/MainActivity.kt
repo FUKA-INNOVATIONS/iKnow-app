@@ -38,7 +38,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    override fun onResume() {
+    /*override fun onResume() {
         super.onResume()
         br = AirPlaneBroadcastReceiver()
         val filter = IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED)
@@ -49,7 +49,7 @@ class MainActivity : ComponentActivity() {
             else { ContextCompat.RECEIVER_NOT_EXPORTED }
 
         ContextCompat.registerReceiver(this, br, filter, receiverFlags)
-    }
+    }*/
 
     /*override fun onPause() {
         super.onPause()
