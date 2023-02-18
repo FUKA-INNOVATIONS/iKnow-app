@@ -1,4 +1,4 @@
-package com.fuka.iknow
+package com.fuka.iknow.navigation
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -16,7 +16,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
 import androidx.navigation.navigation
-import com.fuka.iknow.navigation.NavBarItems
+import com.fuka.iknow.R
 import com.fuka.iknow.screens.HomeScreen
 import com.fuka.iknow.screens.SettingsScreen
 import com.fuka.iknow.screens.URLCheckerScreen
@@ -56,7 +56,7 @@ fun NavigationPage(viewModel: DatabaseViewModel) {
         bottomBar = {
             NavigationBar(
                 modifier = Modifier
-                    .height(65.dp)
+                    .height(75.dp)
                     .background(color = MaterialTheme.colorScheme.secondary)
             ) {
                 tabItems.forEachIndexed { index, barItem ->
@@ -77,7 +77,8 @@ fun NavigationPage(viewModel: DatabaseViewModel) {
                     icon = {
                         Box(
                             modifier = Modifier
-                                .height(800.dp)
+                                //.align(alignment = Alignment.Top) // Doesn't work here
+                                .size(60.dp)
                         ) {
                             when (barItem.title) {
                                 "Home" -> Icon(

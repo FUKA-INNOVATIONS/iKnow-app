@@ -9,6 +9,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import com.fuka.iknow.boradcast.reciever.AirPlaneBroadcastReceiver
+import com.fuka.iknow.navigation.NavigationPage
 import com.fuka.iknow.viewModels.DatabaseViewModel
 
 
