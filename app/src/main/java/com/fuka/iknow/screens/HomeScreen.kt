@@ -9,6 +9,7 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.fuka.iknow.NavigationPage
 import com.fuka.iknow.viewModels.DatabaseViewModel
 
 
@@ -17,15 +18,6 @@ import com.fuka.iknow.viewModels.DatabaseViewModel
 fun HomeScreen(viewModel: DatabaseViewModel) {
     val broadcastActionList = viewModel.getBroadcastActions().observeAsState(listOf())
     Scaffold(
-        /*
-    topBar = {
-        CenterAlignedTopAppBar(
-            title = {
-                Text("Home")
-            }
-        )
-    },
-         */
     content = { padding ->
         LazyColumn(
             modifier = Modifier
@@ -35,6 +27,8 @@ fun HomeScreen(viewModel: DatabaseViewModel) {
         ) {
             items(broadcastActionList.value) {
                 // Content here
+
+                Spacer(modifier = Modifier.height(20.dp))
 
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
@@ -78,6 +72,7 @@ fun HomeScreen(viewModel: DatabaseViewModel) {
                 Text("Add more!")
             }
         }
+
     }
     )
 }

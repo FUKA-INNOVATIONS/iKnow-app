@@ -1,35 +1,31 @@
 package com.fuka.iknow
 
-import androidx.compose.foundation.layout.Box
-//import androidx.compose.foundation.layout.RowScopeInstance.align
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavGraph.Companion.findStartDestination
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
 import androidx.navigation.navigation
-import com.fuka.iknow.navigation.HomeScreen
 import com.fuka.iknow.navigation.NavBarItems
-import com.fuka.iknow.navigation.NavRoutes
+import com.fuka.iknow.screens.HomeScreen
+import com.fuka.iknow.screens.SettingsScreen
+import com.fuka.iknow.screens.URLCheckerScreen
 import com.fuka.iknow.viewModels.DatabaseViewModel
 
 
 /**
- * TODO: Poista Home teksti etusivulta.
- * TODO: Siirrää navigaatio labelit ikonien alle.
- * TODO: Pistä navigaatio toimimaan muillekkin sivuille.
- * TODO: Poista kaikki turhat tiedostot ja nimeä tämä uudelleen.
- * TODO: Poista material 1 dependency gradlesta.
+ * TODO: Raise navigation icons above the navigation labels.
+ * TODO: Implement stack navigation to API screen.
  */
 
 
@@ -49,13 +45,20 @@ fun NavigationPage(viewModel: DatabaseViewModel) {
     val routeName = navBackStackEntry.value?.destination?.route
 
     Scaffold(
+        // Top app bar.
+        // In this file if navigation is added in the future.
         topBar = {
             TopAppBar(title = { Text(text = "$routeName") })
         },
 
-        // Bottom bar uses composable NavigationBar
+        // Bottom navigation bar.
+        // Bottom bar uses composable NavigationBar.
         bottomBar = {
-            NavigationBar() {
+            NavigationBar(
+                modifier = Modifier
+                    .height(65.dp)
+                    .background(color = MaterialTheme.colorScheme.secondary)
+            ) {
                 tabItems.forEachIndexed { index, barItem ->
 
                 NavigationBarItem(
@@ -72,19 +75,24 @@ fun NavigationPage(viewModel: DatabaseViewModel) {
                         })
                     },
                     icon = {
-                        when (barItem.title) {
-                            "Home" -> Icon(
-                                painter = painterResource(id = R.drawable.ic_home_foreground),
-                                contentDescription = null
-                            )
-                            "URLCheck" -> Icon(
-                                painter = painterResource(id = R.drawable.ic_url_check_foreground),
-                                contentDescription = null
-                            )
-                            "Settings" -> Icon(
-                                painter = painterResource(id = R.drawable.ic_settings_foreground),
-                                contentDescription = null
-                            )
+                        Box(
+                            modifier = Modifier
+                                .height(800.dp)
+                        ) {
+                            when (barItem.title) {
+                                "Home" -> Icon(
+                                    painter = painterResource(id = R.drawable.ic_home_foreground),
+                                    contentDescription = null
+                                )
+                                "URLCheck" -> Icon(
+                                    painter = painterResource(id = R.drawable.ic_url_check_foreground),
+                                    contentDescription = null
+                                )
+                                "Settings" -> Icon(
+                                    painter = painterResource(id = R.drawable.ic_settings_foreground),
+                                    contentDescription = null
+                                )
+                            }
                         }
                     },
                     label = { Text(text = barItem.title) }
@@ -97,15 +105,20 @@ fun NavigationPage(viewModel: DatabaseViewModel) {
                 .padding(it)
                 .fillMaxSize()
         ) {
-            NavHost(navController = navController, startDestination = "Home") {
+            NavHost(navController = navController, startDestination = "home") {
 
-                navigation(startDestination = "HomeScreen", route = "Home") {
+                navigation(startDestination = "HomeScreen", route = "home") {
                     composable("HomeScreen") {
                         HomeScreen(viewModel = viewModel)
                     }
+                }
 
+                navigation(startDestination = "URLCheckerScreen", route = "url_check") {
+                    composable("URLCheckerScreen") {
+                        URLCheckerScreen()
+                    }
                     /*
-                    Tähän tyyliin kun tekee sen detailed view url hausta
+                    Tähän tyyliin kun tekee sen detailed view
 
                     composable("HomePage" , deepLinks = listOf(NavDeepLink("deeplink://home"))) {
                         HomePage(navController = navController)
@@ -115,23 +128,14 @@ fun NavigationPage(viewModel: DatabaseViewModel) {
                     composable("HomeDetailPage",deepLinks = listOf(NavDeepLink("deeplink://homeDetail")) ) {
                         HomeDetailPage(navController = navController)
                     }
-                     */
-
+                    */
                 }
-/*
-                navigation(startDestination = "URLChecker", route = "URL_check") {
-                    composable(NavRoutes.URLChecker.route) {
-                        NavRoutes.URLChecker
+
+                navigation(startDestination = "SettingsScreen", route = "settings") {
+                    composable("SettingsScreen") {
+                        SettingsScreen()
                     }
                 }
-
-                navigation(startDestination = "Settings", route = "Settings") {
-                    composable(NavRoutes.Settings.route) {
-                        NavRoutes.Settings
-                    }
-                }
-
- */
             }
         }
     }
