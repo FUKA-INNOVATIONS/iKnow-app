@@ -58,10 +58,10 @@ class MainActivity : ComponentActivity() {
         //ContextCompat.registerReceiver(this, br, filterUserUnlocked, receiverFlags)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    /*override fun onPause() {
+        super.onPause()
         unregisterReceiver(br)
-    }
+    }*/
 }
 
 
