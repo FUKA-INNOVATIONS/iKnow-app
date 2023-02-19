@@ -40,7 +40,7 @@ class DatabaseViewModel(application: Application) : AndroidViewModel(application
     }
 
     // For testing // Adds defined amount of default BroadcastActions
-    fun addBroadcastActions() {
+    fun addBroadcastActions(action: String, type: String) {
         var timestamp: String
 
         viewModelScope.launch(Dispatchers.IO) {
@@ -53,8 +53,8 @@ class DatabaseViewModel(application: Application) : AndroidViewModel(application
                 db.iKnowDao.insertOrUpdateBroadcastAction(
                     BroadcastAction(
                         0,
-                        "Video captured",
-                        "Camera",
+                        action,
+                        type,
                         timestamp
                     )
                 )

@@ -41,20 +41,27 @@ class MainActivity : ComponentActivity() {
     override fun onResume() {
         super.onResume()
         br = AirPlaneBroadcastReceiver()
-        val filter = IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED)
+
+        val filterAirplane = IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED)
+        val filterCameraButton = IntentFilter(Intent.ACTION_CAMERA_BUTTON)
+        val filterCALL = IntentFilter(Intent.ACTION_CALL)
+        val filterUserUnlocked = IntentFilter(Intent.ACTION_USER_UNLOCKED)
 
         val listenToBroadcastsFromOtherApps = false
         val receiverFlags =
             if (listenToBroadcastsFromOtherApps) { ContextCompat.RECEIVER_EXPORTED }
             else { ContextCompat.RECEIVER_NOT_EXPORTED }
 
-        ContextCompat.registerReceiver(this, br, filter, receiverFlags)
+        ContextCompat.registerReceiver(this, br, filterAirplane, receiverFlags)
+        //ContextCompat.registerReceiver(this, br, filterCameraButton, receiverFlags)
+        //ContextCompat.registerReceiver(this, br, filterCALL, receiverFlags)
+        //ContextCompat.registerReceiver(this, br, filterUserUnlocked, receiverFlags)
     }
 
-    /*override fun onPause() {
-        super.onPause()
+    override fun onDestroy() {
+        super.onDestroy()
         unregisterReceiver(br)
-    }*/
+    }
 }
 
 
@@ -131,7 +138,7 @@ fun AppBody(viewModel: DatabaseViewModel) {
                     .padding(padding)
             ) {
                 FloatingActionButton(
-                    onClick = { viewModel.addBroadcastActions() },
+                    onClick = { viewModel.addBroadcastActions("dummyAction", "dummyType") },
                     modifier = Modifier
                         .padding(all = 15.dp)
                 ) {
