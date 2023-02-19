@@ -64,7 +64,7 @@ fun HomeScreen(viewModel: DatabaseViewModel) {
                 .padding(padding)
         ) {
             FloatingActionButton(
-                onClick = { viewModel.addBroadcastActions() },
+                onClick = { /*viewModel.addBroadcastActions()*/ },
                 modifier = Modifier
                     .padding(all = 15.dp)
             ) {
