@@ -2,12 +2,19 @@ package com.fuka.iknow.navigation
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.NavHost
@@ -15,6 +22,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
+import androidx.navigation.navigation
 import androidx.navigation.navigation
 import com.fuka.iknow.R
 import com.fuka.iknow.screens.HomeScreen
@@ -28,6 +36,7 @@ import com.fuka.iknow.viewModels.DatabaseViewModel
  * TODO: Implement stack navigation to API screen.
  */
 
+// TODO: fix material theme reference, dependencies, split code into separate files...
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -57,50 +66,35 @@ fun NavigationPage(viewModel: DatabaseViewModel) {
             NavigationBar(
                 modifier = Modifier
                     .height(75.dp)
-                    .background(color = MaterialTheme.colorScheme.secondary)
+                    .background(color = MaterialTheme.colorScheme.secondary) // TODO: fix material theme reference
             ) {
                 tabItems.forEachIndexed { index, barItem ->
 
-                NavigationBarItem(
-                    selected = parentRouteName == barItem.route,
-                    onClick = {
-                        selectedItem.value = index
-                        navController.navigate(barItem.route, navOptions {
-                            popUpTo(navController.graph.findStartDestination().id) {
-                                saveState = true
-                            }
+                    NavigationBarItem(
+                        selected = parentRouteName == barItem.route,
+                        onClick = {
+                            selectedItem.value = index
+                            navController.navigate(barItem.route, navOptions {
+                                popUpTo(navController.graph.findStartDestination().id) {
+                                    saveState = true
+                                }
 
-                            launchSingleTop = true
-                            restoreState = true
-                        })
-                    },
-                    icon = {
-                        Box(
-                            modifier = Modifier
-                                //.align(alignment = Alignment.Top) // Doesn't work here
-                                .size(60.dp)
-                        ) {
+                                launchSingleTop = true
+                                restoreState = true
+                            })
+                        },
+                        icon = {
                             when (barItem.title) {
-                                "Home" -> Icon(
-                                    painter = painterResource(id = R.drawable.ic_home_foreground),
-                                    contentDescription = null
-                                )
-                                "URLCheck" -> Icon(
-                                    painter = painterResource(id = R.drawable.ic_url_check_foreground),
-                                    contentDescription = null
-                                )
-                                "Settings" -> Icon(
-                                    painter = painterResource(id = R.drawable.ic_settings_foreground),
-                                    contentDescription = null
-                                )
+                                "Home" -> Icon(Icons.Filled.Home, "Home screen navigation icon")
+                                "URLCheck" -> Icon(Icons.Filled.Search, "Search screen navigation icon")
+                                "Settings" -> Icon(Icons.Filled.Settings, "Settings navigation icon")
                             }
-                        }
-                    },
-                    label = { Text(text = barItem.title) }
-                )
+                        },
+                        label = { Text(text = barItem.title, maxLines = 1, overflow = TextOverflow.Ellipsis) }
+                    )
+                }
             }
-        }
-    }) {
+        }) {
         Box(
             modifier = Modifier
                 .padding(it)
@@ -118,18 +112,6 @@ fun NavigationPage(viewModel: DatabaseViewModel) {
                     composable("URLCheckerScreen") {
                         URLCheckerScreen()
                     }
-                    /*
-                    Tähän tyyliin kun tekee sen detailed view
-
-                    composable("HomePage" , deepLinks = listOf(NavDeepLink("deeplink://home"))) {
-                        HomePage(navController = navController)
-                    }
-                    // Add another route in Home nested navigation.
-                    // Now Create for Another Composable
-                    composable("HomeDetailPage",deepLinks = listOf(NavDeepLink("deeplink://homeDetail")) ) {
-                        HomeDetailPage(navController = navController)
-                    }
-                    */
                 }
 
                 navigation(startDestination = "SettingsScreen", route = "settings") {
