@@ -21,7 +21,7 @@ import com.fuka.iknow.boradcast.reciever.AirPlaneBroadcastReceiver
 import com.fuka.iknow.navigation.NavigationPage
 import com.fuka.iknow.ui.theme.IKnowTheme
 import com.fuka.iknow.viewModels.DatabaseViewModel
-
+import dagger.hilt.android.AndroidEntryPoint
 
 class MainActivity : ComponentActivity() {
 
@@ -31,6 +31,8 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
         setContent {
             NavigationPage(viewModel)
         }
@@ -51,100 +53,12 @@ class MainActivity : ComponentActivity() {
             else { ContextCompat.RECEIVER_NOT_EXPORTED }
 
         ContextCompat.registerReceiver(this, br, filterAirplane, receiverFlags)
-        //ContextCompat.registerReceiver(this, br, filterCameraButton, receiverFlags)
-        //ContextCompat.registerReceiver(this, br, filterCALL, receiverFlags)
-        //ContextCompat.registerReceiver(this, br, filterUserUnlocked, receiverFlags)
+
     }
 
     /*override fun onPause() {
         super.onPause()
         unregisterReceiver(br)
     }*/
-
-}
-
-
-@Composable
-fun MainAppNav(viewModel: DatabaseViewModel) {
-    IKnowTheme {
-        // A surface container using the 'background' color from the theme
-        Surface(
-            modifier = Modifier.fillMaxSize(),
-            color = MaterialTheme.colorScheme.background
-        ) {
-            AppBody(viewModel)
-        }
-    }
-}
-
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun AppBody(viewModel: DatabaseViewModel) {
-    val broadcastActionList = viewModel.getBroadcastActions().observeAsState(listOf())
-
-    Scaffold(
-        topBar = {
-            CenterAlignedTopAppBar(
-                title = {
-                    Text("iKnow")
-                }
-            )
-        },
-
-        content = { padding ->
-            LazyColumn(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(padding),
-                contentPadding = PaddingValues(bottom = 15.dp)
-            ) {
-                items(broadcastActionList.value) {
-                    // Content here
-
-                    Column(
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        modifier = Modifier
-                            .fillMaxHeight()
-                            .fillMaxWidth()
-                            .padding(padding)
-                    ) {
-                        Card(Modifier.size(width = 300.dp, height = 110.dp)) {
-                            Text(
-                                text = "Type: ${it.type}",
-                                // style = ...
-                            )
-                            Text(
-                                text = "Value: ${it.value}",
-                                // style = ...
-                            )
-                            Text(
-                                text = "Time recorded: ${it.timestamp}"
-                                // style = ...
-                            )
-                        }
-                    }
-                }
-            }
-
-            // Floating action button
-            Column(
-                horizontalAlignment = Alignment.End,
-                verticalArrangement = Arrangement.Bottom,
-                modifier = Modifier
-                    .fillMaxHeight()
-                    .fillMaxWidth()
-                    .padding(padding)
-            ) {
-                FloatingActionButton(
-                    onClick = { viewModel.addBroadcastActions("dummyAction", "dummyType") },
-                    modifier = Modifier
-                        .padding(all = 15.dp)
-                ) {
-                    Text("Add more!")
-                }
-            }
-        }
-    )
 
 }

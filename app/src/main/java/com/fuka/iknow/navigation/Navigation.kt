@@ -3,10 +3,7 @@ package com.fuka.iknow.navigation
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.Search
-import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -57,7 +54,31 @@ fun NavigationPage(viewModel: DatabaseViewModel) {
         // Top app bar.
         // In this file if navigation is added in the future.
         topBar = {
-            TopAppBar(title = { Text(text = "$routeName") })
+            CenterAlignedTopAppBar(
+                title = {
+                    Text(
+                        "$routeName",
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                },
+                /*navigationIcon = {
+                    IconButton(onClick = { /* doSomething() */ }) {
+                        Icon(
+                            imageVector = Icons.Filled.Menu,
+                            contentDescription = "Localized description"
+                        )
+                    }
+                },*/
+                /*actions = {
+                    IconButton(onClick = { /* doSomething() */ }) {
+                        Icon(
+                            imageVector = Icons.Filled.Favorite,
+                            contentDescription = "Localized description"
+                        )
+                    }
+                }*/
+            )
         },
 
         // Bottom navigation bar.
@@ -90,7 +111,7 @@ fun NavigationPage(viewModel: DatabaseViewModel) {
                                 "Settings" -> Icon(Icons.Filled.Settings, "Settings navigation icon")
                             }
                         },
-                        label = { Text(text = barItem.title, maxLines = 1, overflow = TextOverflow.Ellipsis) }
+                        label = { Text(text = barItem.title, maxLines = 1, overflow = TextOverflow.Ellipsis) } //
                     )
                 }
             }
@@ -100,26 +121,7 @@ fun NavigationPage(viewModel: DatabaseViewModel) {
                 .padding(it)
                 .fillMaxSize()
         ) {
-            NavHost(navController = navController, startDestination = "home") {
-
-                navigation(startDestination = "HomeScreen", route = "home") {
-                    composable("HomeScreen") {
-                        HomeScreen(viewModel = viewModel)
-                    }
-                }
-
-                navigation(startDestination = "URLCheckerScreen", route = "url_check") {
-                    composable("URLCheckerScreen") {
-                        URLCheckerScreen()
-                    }
-                }
-
-                navigation(startDestination = "SettingsScreen", route = "settings") {
-                    composable("SettingsScreen") {
-                        SettingsScreen()
-                    }
-                }
-            }
+            AppNavigation(navController = navController)
         }
     }
 }

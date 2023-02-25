@@ -6,14 +6,16 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log
 import android.widget.Toast
+import com.fuka.iknow.data.database.dataBase.iKnowDatabase
 import com.fuka.iknow.viewModels.DatabaseViewModel
+import javax.inject.Inject
 
 val TAG = "iKnow-app"
 class AirPlaneBroadcastReceiver: BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
         val viewModel = DatabaseViewModel(Application())
-        viewModel.addBroadcastActions(intent.extras.toString(), "airplaneMode")
+        viewModel.addBroadcastAction(intent.extras.toString(), "airplaneMode")
 
         Log.d(TAG, "intent: $intent")
         Log.d(TAG, "intent extras: ${intent.extras}")

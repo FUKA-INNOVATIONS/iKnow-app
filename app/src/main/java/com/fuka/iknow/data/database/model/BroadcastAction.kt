@@ -1,4 +1,4 @@
-package com.fuka.iknow.data.database.entity
+package com.fuka.iknow.data.database.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -9,5 +9,6 @@ data class BroadcastAction(
     val id: Long,
     val value: String,
     val type: String,
+    var status: Boolean,
     val timestamp: String
 )
