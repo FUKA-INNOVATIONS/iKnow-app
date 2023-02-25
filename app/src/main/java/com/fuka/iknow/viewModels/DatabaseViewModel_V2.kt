@@ -22,30 +22,48 @@ import kotlinx.coroutines.launch
 import java.time.format.DateTimeFormatter.ofPattern
 import javax.inject.Inject
 
+val TAGG = "iKnow-app"
 
-val TAG = "iKnow-app"
-class DatabaseViewModel(application: Application) : AndroidViewModel(application) {
+class DatabaseViewModel_V2 () : ViewModel() {
 
-    private val db = iKnowDatabase.get_iKnowDatabase(application)
+
+    private val db = iKnowDatabase.get_iKnowDatabase(Application())
+
+    private lateinit var _broadcastActionList: LiveData<List<BroadcastAction>>
+    var broadcastActionList = _broadcastActionList
+
+    private lateinit var _singleBroadcastAction: MutableLiveData<LiveData<BroadcastAction>>
+
+    private lateinit var _allBroadcastActionsByType: MutableLiveData<LiveData<List<BroadcastAction>>>
+
+    init {
+        getBroadcastActions()
+    }
 
     // Gets all of the BroadcastActions
-    fun getBroadcastActions(): LiveData<List<BroadcastAction>> {
-        return db.iKnowDao().getAll()
+    private fun getBroadcastActions() {
+        //viewModelScope.launch {  all.value = repository.getAllBroadcastActions() }
+        viewModelScope.launch {  _broadcastActionList = db.iKnowDao().getAll() }
     }
 
     // Gets BroadcastAction by ID
-    fun getBroadcastActionById(id: Long): LiveData<BroadcastAction> {
-        return db.iKnowDao().getById(id)
+    fun getBroadcastActionById(id: Long) {
+        //viewModelScope.launch { single.value = repository.getBroadcastActionById(id) }
+        viewModelScope.launch { _singleBroadcastAction.value = db.iKnowDao().getById(id) }
     }
 
     // Gets all BroadcastActions by type
-    fun getBroadcastActionsByType(type: String): LiveData<List<BroadcastAction>> {
-        return db.iKnowDao().getByType(type)
+    fun getBroadcastActionsByType(type: String) {
+        //viewModelScope.launch { allByType.value = repository.getBroadcastActionsByType(type) }
+        viewModelScope.launch { _allBroadcastActionsByType.value = db.iKnowDao().getByType(type) }
     }
 
 
     // Adds one BroadcastAction
     fun addBroadcastAction(action: String, type: String) {
+
+        //viewModelScope.launch(Dispatchers.IO) { repository.addBroadcastAction(action, type) }
+
         val timestamp = ofPattern("dd-MM-yyyy HH:mm:ss")
             .withZone(ZoneOffset.UTC)
             .format(Instant.now())
@@ -65,6 +83,7 @@ class DatabaseViewModel(application: Application) : AndroidViewModel(application
 
     fun deleteBroadcastAction(broadcastAction: BroadcastAction) {
         viewModelScope.launch(Dispatchers.IO) {
+            //repository.deleteBroadcastAction(broadcastAction)
             db.iKnowDao().delete(broadcastAction)
         }
     }
@@ -74,6 +93,7 @@ class DatabaseViewModel(application: Application) : AndroidViewModel(application
         Log.d(TAG, broadcastAction.status.toString())
 
         viewModelScope.launch(Dispatchers.IO) {
+            //repository.updateBroadcastAction(broadcastAction)
             db.iKnowDao().update(broadcastAction)
         }
     }

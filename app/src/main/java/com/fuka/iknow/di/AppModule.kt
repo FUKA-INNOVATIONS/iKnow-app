@@ -1,9 +1,11 @@
 package com.fuka.iknow.di
 
+import android.app.Application
 import android.content.Context
 import androidx.room.Room
 import com.fuka.iknow.data.database.dao.BroadcastActionDao
 import com.fuka.iknow.data.database.dataBase.iKnowDatabase
+import com.fuka.iknow.data.database.repository.BroadcastActionRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -26,6 +28,9 @@ object AppModule {
             .fallbackToDestructiveMigration()
             .build()
 
-
+    @Singleton
+    @Provides
+    fun provideBroadcastActionRepository(): BroadcastActionRepository =
+        BroadcastActionRepository(provideBroadcastActionDao(provideAppDatabase(Application())))
 
 }

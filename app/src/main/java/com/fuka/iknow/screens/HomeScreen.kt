@@ -36,12 +36,9 @@ fun HomeScreen() {
             ) {
                 items(broadcastActionList.value) {
 
-                    var actionStatus by remember { mutableStateOf(it.status) } //TODO: fix icon color update issue
-
-
-                    var statusColor by remember { // change list item status icon color based on status: either true (unchecked/red) or false (checked/blue)
-                        mutableStateOf(if (actionStatus) Color.Gray else Color.LightGray)
-                    }
+                    /* var statusColor by remember { // change list item status icon color based on status: either true (unchecked/red) or false (checked/blue)
+                        mutableStateOf(if (it.status) Color.Gray else Color.LightGray)
+                    } */
 
                     Spacer(modifier = Modifier.height(20.dp))
 
@@ -54,13 +51,13 @@ fun HomeScreen() {
                     ) {
                         ListItem(
                             headlineText = { Text("Airplane mode changed") },
-                            overlineText = { Text("${it.type}") },
-                            supportingText = { Text("${it.timestamp}") },
+                            overlineText = { Text(it.type) },
+                            supportingText = { Text(it.timestamp) },
                             leadingContent = {
                                 Icon(
                                     Icons.Filled.CheckCircle,
-                                    contentDescription = "Airplane mode event list item status icon",
-                                    tint = statusColor,
+                                    contentDescription = "Airplane mode event item status icon",
+                                    tint = if (it.status) Color.Gray else Color.LightGray, // TODO: list item is not updated on status change
                                     modifier = Modifier.clickable {
                                         viewModel.changeBroadcastActionStatus(it)
                                     }
@@ -72,9 +69,8 @@ fun HomeScreen() {
                                     contentDescription = "Delete Airplane mode event icon",
                                     tint = MaterialTheme.colorScheme.outline,
                                     modifier = Modifier.clickable {
-                                        actionStatus = !it.status
                                         viewModel.deleteBroadcastAction(it)
-                                        Log.d("iKnow-app", actionStatus.toString())
+                                        Log.d("iKnow-app", it.status.toString())
                                     }
                                 )
                             }

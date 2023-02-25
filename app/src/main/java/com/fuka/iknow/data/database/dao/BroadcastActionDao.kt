@@ -7,23 +7,23 @@ import com.fuka.iknow.data.database.model.BroadcastAction
 @Dao
 interface BroadcastActionDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertBroadcastAction(broadcastAction: BroadcastAction)
+    suspend fun insert(broadcastAction: BroadcastAction)
 
     @Update
-    suspend fun updateBroadcastAction(broadcastAction: BroadcastAction)
+    suspend fun update(broadcastAction: BroadcastAction)
 
     @Delete
-    suspend fun deleteBroadcastAction(broadcastAction: BroadcastAction)
+    suspend fun delete(broadcastAction: BroadcastAction)
 
     @Query("SELECT * FROM BroadcastAction WHERE id == :id")
-    fun getBroadcastActionById(id: Long): LiveData<BroadcastAction>
+    fun getById(id: Long): LiveData<BroadcastAction>
 
     @Query("SELECT * FROM BroadcastAction WHERE type == :type")
-    fun getBroadcastActionsByType(type: String): LiveData<List<BroadcastAction>>
+    fun getByType(type: String): LiveData<List<BroadcastAction>>
 
     @Query("SELECT * FROM BroadcastAction")
-    fun getBroadcastActions(): LiveData<List<BroadcastAction>>
+    fun getAll(): LiveData<List<BroadcastAction>>
 
     @Query("DELETE from BroadcastAction")
-    fun deleteAllBroadcastActions()
+    fun deleteAll()
 }

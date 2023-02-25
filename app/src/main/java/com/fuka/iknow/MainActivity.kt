@@ -23,6 +23,7 @@ import com.fuka.iknow.ui.theme.IKnowTheme
 import com.fuka.iknow.viewModels.DatabaseViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     val viewModel: DatabaseViewModel by viewModels()
