@@ -26,7 +26,7 @@ class AirPlaneBroadcastReceiver: BroadcastReceiver() {
             append("URI: ${intent.toUri(Intent.URI_INTENT_SCHEME)}\n")
             toString().also { log ->
                 Log.d(TAG, log)
-                Toast.makeText(context, log, Toast.LENGTH_LONG).show()
+                //Toast.makeText(context, log, Toast.LENGTH_LONG).show()
             }
         }
     }
