@@ -7,12 +7,13 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.fuka.iknow.data.database.converter.DateTypeConverter
 import com.fuka.iknow.data.database.dao.BroadcastActionDao
-import com.fuka.iknow.data.database.entity.BroadcastAction
+import com.fuka.iknow.data.database.model.BroadcastAction
 
 @Database(entities = [BroadcastAction::class], version = 2, exportSchema = false)
 @TypeConverters(DateTypeConverter::class)
 abstract class iKnowDatabase : RoomDatabase() {
-    abstract val iKnowDao: BroadcastActionDao
+    //abstract val iKnowDao: BroadcastActionDao
+    abstract fun iKnowDao(): BroadcastActionDao
 
     companion object {
         @Volatile
