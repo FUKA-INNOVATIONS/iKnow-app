@@ -6,4 +6,6 @@ import androidx.compose.runtime.Composable
 @Composable
 fun URLCheckerScreen() {
     Text(text = "This is URLChecker")
+
+    // Use coroutine with retrofit !!
 }
