@@ -7,19 +7,29 @@ import android.content.Intent
 import android.util.Log
 import android.widget.Toast
 import com.fuka.iknow.data.database.dataBase.iKnowDatabase
+import com.fuka.iknow.service.BroadcastActionNotificationService
 import com.fuka.iknow.viewModels.DatabaseViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
 val TAG = "iKnow-app"
 class AirPlaneBroadcastReceiver: BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
+        Log.d(TAG, "AirPlaneBroadcastReceiver > onCreate()")
+
+        val service = BroadcastActionNotificationService(context)
+        service.showNotification(33, "Airplane mode changed", "Action: ${intent.action}", intent.hashCode())
+
         val viewModel = DatabaseViewModel(Application())
-        viewModel.addBroadcastAction(intent.extras.toString(), "airplaneMode")
+        viewModel.addBroadcastAction(intent.extras.toString(), "airplaneMode", intent.hashCode())
 
         Log.d(TAG, "intent: $intent")
         Log.d(TAG, "intent extras: ${intent.extras}")
         Log.d(TAG, "context: $context")
+
+        Log.d(TAG, "intent.hashCode: ${intent.hashCode()}")
+        Log.d(TAG, "intent.extras.hashCode: ${intent.extras.hashCode()}")
 
         StringBuilder().apply {
             append("Action: ${intent.action}\n")

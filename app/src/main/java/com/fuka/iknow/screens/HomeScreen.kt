@@ -19,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.fuka.iknow.viewModels.DatabaseViewModel
+import com.fuka.iknow.viewModels.TAG
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -59,6 +60,7 @@ fun HomeScreen() {
                                     contentDescription = "Airplane mode event item status icon",
                                     tint = if (it.status) Color.Gray else Color.LightGray, // TODO: list item is not updated on status change
                                     modifier = Modifier.clickable {
+                                        Log.d(TAG, "it.hashCode: ${it.intentHashcode.toString()}")
                                         viewModel.changeBroadcastActionStatus(it)
                                     }
                                 )

@@ -15,7 +15,7 @@ class BroadcastActionRepository @Inject constructor(private val broadcastActionD
             .withZone(ZoneOffset.UTC)
             .format(Instant.now())
 
-        val newActionData = BroadcastAction(0, action, type, true, timestamp)
+        val newActionData = BroadcastAction(0, action, type, true, timestamp, 4545)
 
         broadcastActionDao.insert(newActionData)
     }

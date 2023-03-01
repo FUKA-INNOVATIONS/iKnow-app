@@ -6,6 +6,7 @@ import androidx.room.Room
 import com.fuka.iknow.data.database.dao.BroadcastActionDao
 import com.fuka.iknow.data.database.dataBase.iKnowDatabase
 import com.fuka.iknow.data.database.repository.BroadcastActionRepository
+import com.fuka.iknow.viewModels.BroadcastActionViewModel
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -32,5 +33,10 @@ object AppModule {
     @Provides
     fun provideBroadcastActionRepository(): BroadcastActionRepository =
         BroadcastActionRepository(provideBroadcastActionDao(provideAppDatabase(Application())))
+
+    @Singleton
+    @Provides
+    fun provideBroadcastActionViewModel(braRepo: BroadcastActionRepository): BroadcastActionViewModel =
+        BroadcastActionViewModel(braRepo)
 
 }
