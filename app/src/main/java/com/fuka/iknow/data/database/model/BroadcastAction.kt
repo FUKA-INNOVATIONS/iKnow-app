@@ -10,5 +10,6 @@ data class BroadcastAction(
     val value: String,
     val type: String,
     var status: Boolean,
-    val timestamp: String
+    val timestamp: String,
+    val intentHashcode: Int
 )
