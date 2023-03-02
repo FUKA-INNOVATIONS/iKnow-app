@@ -1,6 +1,6 @@
 package com.fuka.iknow.api.sbl_api
 
-data class SafeBrowsingLookupRequest(
+data class LookupObject(
     val clientId: String = "iknow",
     val clientVersion: String = "1.7.0",
     val threatTypes: List<String> = listOf("MALWARE", "SOCIAL_ENGINEERING"),
@@ -8,7 +8,7 @@ data class SafeBrowsingLookupRequest(
     val threatEntryTypes: List<String> = listOf("URL"),
     // voi ehkä tulla jotain ongelmaa jos url on string muodossa eikä url
     // tai kun url ei ole lista muodossa
-    val threatEntry: String = "http://www.urltocheck1.org/"
+    val threatEntry: String
 )
 
 /*

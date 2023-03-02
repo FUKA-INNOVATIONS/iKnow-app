@@ -1,7 +1,7 @@
 package com.fuka.iknow.api.sbl_api
 
 import java.time.Duration
-
+/*
 
 data class SafeBrowsingLookupResponse(
     val threatTypes: List<String>,
@@ -11,3 +11,4 @@ data class SafeBrowsingLookupResponse(
     val threatEntryMetadata: Metadata,
     val cacheDuration: Duration,
 )
+ */

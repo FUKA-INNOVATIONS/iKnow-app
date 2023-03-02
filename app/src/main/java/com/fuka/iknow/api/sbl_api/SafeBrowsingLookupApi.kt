@@ -1,33 +1,28 @@
 package com.fuka.iknow.api.sbl_api
 
-import android.webkit.SafeBrowsingResponse
 import retrofit2.Response
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.Headers
-import retrofit2.http.POST
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.*
 
 interface SafeBrowsingLookupApi {
 
-    /*
-    @GET("/quotes")
-    suspend fun getQuotes() : Response<QuoteList>
-     */
-
     // Post
-    @FormUrlEncoded
-    @Headers("Content-Type: application/json")
-    @POST("https://safebrowsing.googleapis.com/v4/threatMatches:find?key=API_KEY HTTP/1.1")
+    //@FormUrlEncoded
+    @POST("https://safebrowsing.googleapis.com/v4/threatMatches:find")
     suspend fun sendRequest(
-        @Field("clientId") clientId: String,
-        @Field("clientVersion") clientVersion: String,
-        @Field("threatTypes") threatTypes: List<String>,
-        @Field("platformTypes") platformTypes: List<String>,
-        @Field("threatEntryTypes") threatEntryTypes: List<String>,
-        @Field("threatEntries") threatEntries: List<String>,
-    ) : Response<SafeBrowsingResponse>
+        @HeaderMap headers: Map<String, String>
+    ) : Response<LookupObject>
 
+    companion object {
+        private const val BASE_URL = "qwerty"
+        val safeBrowsingLookupApi: SafeBrowsingLookupApi by lazy {
+            Retrofit.Builder()
 
-    //suspend fun
-    // @POST("https://safebrowsing.googleapis.com/v4/threatMatches:find?key=API_KEY HTTP/1.1")
+                .addConverterFactory(GsonConverterFactory.create())
+                .baseUrl(BASE_URL)
+                .build().create(SafeBrowsingLookupApi::class.java)
+        }
+    }
+
 }
