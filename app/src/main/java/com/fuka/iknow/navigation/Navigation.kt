@@ -37,7 +37,7 @@ import com.fuka.iknow.viewModels.DatabaseViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NavigationPage(viewModel: DatabaseViewModel) {
+fun NavigationPage() {
     val tabItems = NavBarItems.BarItems
 
     var selectedItem = remember { mutableStateOf(0) }

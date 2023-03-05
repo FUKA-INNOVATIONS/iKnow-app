@@ -17,6 +17,7 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.fuka.iknow.viewModels.DatabaseViewModel
 import com.fuka.iknow.viewModels.TAG
@@ -25,7 +26,8 @@ import com.fuka.iknow.viewModels.TAG
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen() {
-    val viewModel = DatabaseViewModel(Application())
+    val context = LocalContext.current
+    val viewModel = DatabaseViewModel(context.applicationContext as Application)
     val broadcastActionList = viewModel.getBroadcastActions().observeAsState(listOf())
     Scaffold(
         content = { padding ->
