@@ -31,7 +31,6 @@ class MainActivity : ComponentActivity() {
 
     val viewModel: DatabaseViewModel by viewModels()
     val viewModel_v2: BroadcastActionViewModel by viewModels()
-    // @Inject lateinit var viewModel_v2: BroadcastActionViewModel
 
     private lateinit var br: BroadcastReceiver
     private var cancellationSignal: CancellationSignal? = null
@@ -39,23 +38,6 @@ class MainActivity : ComponentActivity() {
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
-        br = AirPlaneBroadcastReceiver()
-
-        val filterAirplane = IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED)
-        val filterCameraButton = IntentFilter(Intent.ACTION_CAMERA_BUTTON)
-        val filterCALL = IntentFilter(Intent.ACTION_CALL)
-        val filterUserUnlocked = IntentFilter(Intent.ACTION_USER_UNLOCKED)
-
-        val listenToBroadcastsFromOtherApps = false
-        val receiverFlags =
-            if (listenToBroadcastsFromOtherApps) { ContextCompat.RECEIVER_EXPORTED }
-            else { ContextCompat.RECEIVER_NOT_EXPORTED }
-
-        ContextCompat.registerReceiver(this, br, filterAirplane, receiverFlags)
-
-
 
         setContent {
             IKnowTheme {
@@ -135,10 +117,6 @@ class MainActivity : ComponentActivity() {
         br = AirPlaneBroadcastReceiver()
 
         val filterAirplane = IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED)
-        val filterCameraButton = IntentFilter(Intent.ACTION_CAMERA_BUTTON)
-        val filterCALL = IntentFilter(Intent.ACTION_CALL)
-        val filterUserUnlocked = IntentFilter(Intent.ACTION_USER_UNLOCKED)
-
         val listenToBroadcastsFromOtherApps = false
         val receiverFlags =
             if (listenToBroadcastsFromOtherApps) { ContextCompat.RECEIVER_EXPORTED }

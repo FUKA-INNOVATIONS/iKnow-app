@@ -21,7 +21,7 @@ class AirPlaneBroadcastReceiver: BroadcastReceiver() {
         val service = BroadcastActionNotificationService(context)
         service.showNotification(33, "Airplane mode changed", "Action: ${intent.action}", intent.hashCode())
 
-        val viewModel = DatabaseViewModel(Application())
+        val viewModel = DatabaseViewModel(context.applicationContext as Application)
         viewModel.addBroadcastAction(intent.extras.toString(), "airplaneMode", intent.hashCode())
 
         Log.d(TAG, "intent: $intent")
