@@ -55,7 +55,9 @@ class MainActivity : ComponentActivity() {
                 super.onAuthenticationSucceeded(result)
                 Toast.makeText(this@MainActivity, "Authentication Succeeded", Toast.LENGTH_SHORT).show()
                 setContent {
-                    NavigationPage()
+                    IKnowTheme {
+                        NavigationPage()
+                    }
                 }
             }
 
