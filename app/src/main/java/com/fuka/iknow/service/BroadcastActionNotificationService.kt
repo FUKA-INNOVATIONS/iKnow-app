@@ -60,10 +60,6 @@ class BroadcastActionNotificationService(private val context: Context) {
 
         // Show the notification
         notificationManager.notify(id, notification)
-
-//            .setStyle( // There are multiple styles, check docs
-//                Notification.BigTextStyle
-//            )
     }
 
     companion object {
