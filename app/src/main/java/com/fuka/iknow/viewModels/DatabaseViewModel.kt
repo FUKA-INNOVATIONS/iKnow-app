@@ -38,14 +38,18 @@ class DatabaseViewModel(application: Application) : AndroidViewModel(application
         return db.iKnowDao().getById(id)
     }
 
-    // Gets all BroadcastActions by type
+    fun getBroadcastActionHashCoded(hashCode: Int?): BroadcastAction {
+        return db.iKnowDao().getByHashcode(hashCode ?: 0)
+    }
+
+        // Gets all BroadcastActions by type
     fun getBroadcastActionsByType(type: String): LiveData<List<BroadcastAction>> {
         return db.iKnowDao().getByType(type)
     }
 
 
     // Adds one BroadcastAction
-    fun addBroadcastAction(action: String, type: String) {
+    fun addBroadcastAction(action: String, type: String, intentHashcode: Int) {
         val timestamp = ofPattern("dd-MM-yyyy HH:mm:ss")
             .withZone(ZoneOffset.UTC)
             .format(Instant.now())
@@ -57,7 +61,8 @@ class DatabaseViewModel(application: Application) : AndroidViewModel(application
                     action,
                     type,
                     true,
-                    timestamp
+                    timestamp,
+                    intentHashcode
                 )
             )
         }

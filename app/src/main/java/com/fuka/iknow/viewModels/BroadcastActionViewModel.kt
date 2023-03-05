@@ -1,18 +1,13 @@
 package com.fuka.iknow.viewModels
 
 import android.app.Application
-import android.content.Context
 import android.util.Log
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.lifecycle.*
-import com.fuka.iknow.data.database.dao.BroadcastActionDao
 
 import com.fuka.iknow.data.database.dataBase.iKnowDatabase;
 import com.fuka.iknow.data.database.model.BroadcastAction;
 import com.fuka.iknow.data.database.repository.BroadcastActionRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
-import kotlinx.coroutines.CoroutineScope
 
 import java.time.Instant;
 import java.time.ZoneOffset;
@@ -24,7 +19,8 @@ import javax.inject.Inject
 
 val TAGG = "iKnow-app"
 
-class DatabaseViewModel_V2 () : ViewModel() {
+@HiltViewModel
+class BroadcastActionViewModel @Inject constructor(private val broadcastActionRepository: BroadcastActionRepository) : ViewModel() {
 
 
     private val db = iKnowDatabase.get_iKnowDatabase(Application())
@@ -40,8 +36,12 @@ class DatabaseViewModel_V2 () : ViewModel() {
         getBroadcastActions()
     }
 
+    fun test() {
+        Log.d(TAG, "hello")
+    }
+
     // Gets all of the BroadcastActions
-    private fun getBroadcastActions() {
+    fun getBroadcastActions() {
         //viewModelScope.launch {  all.value = repository.getAllBroadcastActions() }
         viewModelScope.launch {  _broadcastActionList = db.iKnowDao().getAll() }
     }
@@ -60,7 +60,7 @@ class DatabaseViewModel_V2 () : ViewModel() {
 
 
     // Adds one BroadcastAction
-    fun addBroadcastAction(action: String, type: String) {
+    fun addBroadcastAction(action: String, type: String, intentHashcode: Int) {
 
         //viewModelScope.launch(Dispatchers.IO) { repository.addBroadcastAction(action, type) }
 
@@ -75,7 +75,8 @@ class DatabaseViewModel_V2 () : ViewModel() {
                     action,
                     type,
                     true,
-                    timestamp
+                    timestamp,
+                    intentHashcode
                 )
             )
         }

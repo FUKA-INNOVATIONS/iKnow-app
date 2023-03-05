@@ -2,6 +2,7 @@ package com.fuka.iknow
 
 import android.Manifest
 import android.app.KeyguardManager
+import android.app.Application
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -22,6 +23,11 @@ import com.fuka.iknow.boradcast.reciever.AirPlaneBroadcastReceiver
 import com.fuka.iknow.navigation.NavigationPage
 import com.fuka.iknow.screens.LoginScreen
 import com.fuka.iknow.ui.theme.IKnowTheme
+import androidx.core.content.ContextCompat
+import com.fuka.iknow.boradcast.reciever.AirPlaneBroadcastReceiver
+import com.fuka.iknow.navigation.NavigationPage
+import com.fuka.iknow.service.BroadcastActionNotificationService
+import com.fuka.iknow.viewModels.BroadcastActionViewModel
 import com.fuka.iknow.viewModels.DatabaseViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -29,6 +35,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     val viewModel: DatabaseViewModel by viewModels()
+    val viewModel_v2: BroadcastActionViewModel by viewModels()
+    // @Inject lateinit var viewModel_v2: BroadcastActionViewModel
 
     private lateinit var br: BroadcastReceiver
     private var cancellationSignal: CancellationSignal? = null

@@ -21,6 +21,9 @@ interface BroadcastActionDao {
     @Query("SELECT * FROM BroadcastAction WHERE type == :type")
     fun getByType(type: String): LiveData<List<BroadcastAction>>
 
+    @Query("SELECT * FROM BroadcastAction WHERE intentHashcode == :hashCode")
+    fun getByHashcode(hashCode: Int): BroadcastAction
+
     @Query("SELECT * FROM BroadcastAction")
     fun getAll(): LiveData<List<BroadcastAction>>
 
