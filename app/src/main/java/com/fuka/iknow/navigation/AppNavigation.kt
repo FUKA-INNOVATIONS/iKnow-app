@@ -11,9 +11,9 @@ import com.fuka.iknow.screens.URLCheckerScreen
 
 @Composable
 fun AppNavigation(navController: NavHostController) {
-    NavHost(navController = navController, startDestination = "home") {
+    NavHost(navController = navController, startDestination = "events") {
 
-        navigation(startDestination = "HomeScreen", route = "home") {
+        navigation(startDestination = "HomeScreen", route = "events") {
             composable("HomeScreen") {
                 HomeScreen()
             }

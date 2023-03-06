@@ -19,6 +19,7 @@ import androidx.compose.material3.*
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.fuka.iknow.boradcast.reciever.AirPlaneBroadcastReceiver
+import com.fuka.iknow.boradcast.reciever.BatteryLevelBroadcastReceiver
 import com.fuka.iknow.navigation.NavigationPage
 import com.fuka.iknow.screens.LoginScreen
 import com.fuka.iknow.ui.theme.IKnowTheme
@@ -29,10 +30,8 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    val viewModel: DatabaseViewModel by viewModels()
-    val viewModel_v2: BroadcastActionViewModel by viewModels()
-
-    private lateinit var br: BroadcastReceiver
+    private lateinit var brAirplane: BroadcastReceiver
+    private lateinit var brBattery: BroadcastReceiver
     private var cancellationSignal: CancellationSignal? = null
 
     @RequiresApi(Build.VERSION_CODES.Q)
@@ -116,15 +115,18 @@ class MainActivity : ComponentActivity() {
 
     override fun onResume() {
         super.onResume()
-        br = AirPlaneBroadcastReceiver()
+        brAirplane = AirPlaneBroadcastReceiver()
+        brBattery = BatteryLevelBroadcastReceiver()
 
         val filterAirplane = IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED)
+        val filterBatteryLow = IntentFilter(Intent.ACTION_BATTERY_LOW)
         val listenToBroadcastsFromOtherApps = false
         val receiverFlags =
             if (listenToBroadcastsFromOtherApps) { ContextCompat.RECEIVER_EXPORTED }
             else { ContextCompat.RECEIVER_NOT_EXPORTED }
 
-        ContextCompat.registerReceiver(this, br, filterAirplane, receiverFlags)
+        ContextCompat.registerReceiver(this, brAirplane, filterAirplane, receiverFlags)
+        ContextCompat.registerReceiver(this, brBattery, filterBatteryLow, receiverFlags)
 
     }
 
