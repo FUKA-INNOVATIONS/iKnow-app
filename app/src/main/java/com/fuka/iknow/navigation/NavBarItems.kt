@@ -5,7 +5,7 @@ import com.fuka.iknow.R
 object NavBarItems {
     val BarItems = listOf(
         BarItem(
-            title = "Home",
+            title = "Events",
             icon = R.drawable.ic_home_foreground,
             route = "home"
         ),

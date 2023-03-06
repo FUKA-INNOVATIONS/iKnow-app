@@ -106,7 +106,7 @@ fun NavigationPage() {
                         },
                         icon = {
                             when (barItem.title) {
-                                "Home" -> Icon(Icons.Filled.Home, "Home screen navigation icon")
+                                "Events" -> Icon(Icons.Filled.Home, "Home screen navigation icon")
                                 "URLCheck" -> Icon(Icons.Filled.Search, "Search screen navigation icon")
                                 "Settings" -> Icon(Icons.Filled.Settings, "Settings navigation icon")
                             }
