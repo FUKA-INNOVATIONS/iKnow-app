@@ -29,61 +29,87 @@ fun HomeScreen() {
     val context = LocalContext.current
     val viewModel = DatabaseViewModel(context.applicationContext as Application)
     val broadcastActionList = viewModel.getBroadcastActions().observeAsState(listOf())
-    Scaffold(
-        content = { padding ->
-            LazyColumn(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(padding),
-                contentPadding = PaddingValues(bottom = 15.dp)
-            ) {
-                items(broadcastActionList.value) {
 
-                    /* var statusColor by remember { // change list item status icon color based on status: either true (unchecked/red) or false (checked/blue)
-                        mutableStateOf(if (it.status) Color.Gray else Color.LightGray)
-                    } */
 
-                    Spacer(modifier = Modifier.height(20.dp))
 
-                    Column(
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        modifier = Modifier
-                            .fillMaxHeight()
-                            .fillMaxWidth()
-                            .padding(padding)
-                    ) {
-                        ListItem(
-                            headlineText = { Text("Airplane mode changed") },
-                            overlineText = { Text(it.type) },
-                            supportingText = { Text(it.timestamp) },
-                            leadingContent = {
-                                Icon(
-                                    Icons.Filled.CheckCircle,
-                                    contentDescription = "Airplane mode event item status icon",
-                                    tint = if (it.status) Color.Gray else Color.LightGray, // TODO: list item is not updated on status change
-                                    modifier = Modifier.clickable {
-                                        Log.d(TAG, "it.hashCode: ${it.intentHashcode.toString()}")
-                                        viewModel.changeBroadcastActionStatus(it)
-                                    }
-                                )
-                            },
-                            trailingContent = {
-                                Icon(
-                                    Icons.Filled.Delete,
-                                    contentDescription = "Delete Airplane mode event icon",
-                                    tint = MaterialTheme.colorScheme.outline,
-                                    modifier = Modifier.clickable {
-                                        viewModel.deleteBroadcastAction(it)
-                                        Log.d("iKnow-app", it.status.toString())
-                                    }
-                                )
-                            }
-                        )
-                        Divider()
-                    }
-                }
+    Column {
+        Row(modifier = Modifier.fillMaxWidth().padding(bottom = 15.dp), horizontalArrangement = Arrangement.SpaceBetween) {
+            OutlinedButton(onClick = { /*TODO*/ }) {
+                Text(text = "Airplane mode")
             }
 
+            OutlinedButton(onClick = { /*TODO*/ }) {
+                Text(text = "Battery level")
+            }
+
+            OutlinedButton(onClick = { /*TODO*/ }) {
+                Text(text = "Display all")
+            }
         }
-    )
+
+
+        Scaffold(
+            content = { padding ->
+                LazyColumn(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(padding),
+                    contentPadding = PaddingValues(bottom = 15.dp, top = 10.dp)
+                ) {
+                    items(broadcastActionList.value) {
+
+                        /* var statusColor by remember { // change list item status icon color based on status: either true (unchecked/red) or false (checked/blue)
+                            mutableStateOf(if (it.status) Color.Gray else Color.LightGray)
+                        } */
+
+                        Spacer(modifier = Modifier.height(20.dp))
+
+                        Column(
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            modifier = Modifier
+                                .fillMaxHeight()
+                                .fillMaxWidth()
+                                .padding(padding)
+                        ) {
+                            ListItem(
+                                //headlineText = { Text("Airplane mode changed") },
+                                headlineText = { Text(it.type) },
+                                //overlineText = { Text(it.type) },
+                                supportingText = { Text(it.timestamp) },
+                                leadingContent = {
+                                    Icon(
+                                        Icons.Filled.CheckCircle,
+                                        contentDescription = "Airplane mode event item status icon",
+                                        tint = if (it.status) Color.Gray else Color.LightGray, // TODO: list item is not updated on status change
+                                        modifier = Modifier.clickable {
+                                            Log.d(
+                                                TAG,
+                                                "it.hashCode: ${it.intentHashcode.toString()}"
+                                            )
+                                            viewModel.changeBroadcastActionStatus(it)
+                                        }
+                                    )
+                                },
+                                trailingContent = {
+                                    Icon(
+                                        Icons.Filled.Delete,
+                                        contentDescription = "Delete Airplane mode event icon",
+                                        tint = MaterialTheme.colorScheme.outline,
+                                        modifier = Modifier.clickable {
+                                            viewModel.deleteBroadcastAction(it)
+                                            Log.d("iKnow-app", it.status.toString())
+                                        }
+                                    )
+                                }
+                            )
+                            Divider()
+                        }
+                    }
+                }
+
+            }
+        )
+    }
+
+
 }
