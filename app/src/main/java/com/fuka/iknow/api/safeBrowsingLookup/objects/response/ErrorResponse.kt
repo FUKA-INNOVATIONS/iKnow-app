@@ -1,4 +1,4 @@
-package com.fuka.iknow.api.safeBrowsingLookup.Objects
+package com.fuka.iknow.api.safeBrowsingLookup.objects.response
 
 import com.fasterxml.jackson.annotation.JsonProperty
 
