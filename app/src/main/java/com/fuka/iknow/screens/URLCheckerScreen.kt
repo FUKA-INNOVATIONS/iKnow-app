@@ -20,111 +20,97 @@ import kotlinx.coroutines.*
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun URLCheckerScreen() {
-  var urlValue by remember { mutableStateOf("") }
-  Text(text = "This is URLChecker")
+    var urlValue by remember { mutableStateOf("") }
+    var matchCount by remember { mutableStateOf(0) }
 
-  Scaffold(
-    content = { padding ->
-      Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Bottom,
-        modifier = Modifier
-          .fillMaxHeight()
-          .fillMaxWidth()
-          .padding(padding)
-      ) {
-        TextField(
-          value = urlValue,
-          onValueChange = { urlValue = it },
-          label = { Text("Place the URL you want to check here") }
-        )
-      }
+    Text(text = "This is URLChecker")
 
-      // Button
-      Column(
-        horizontalAlignment = Alignment.End,
-        verticalArrangement = Arrangement.Bottom,
-        modifier = Modifier
-          .fillMaxHeight()
-          .fillMaxWidth()
-          .padding(padding)
-      ) {
-        FloatingActionButton(
-          onClick = { checkUrl(urlValue) },
-          modifier = Modifier
-            .padding(all = 15.dp)
-        ) {
-          Text("Check url")
+    Scaffold(
+        content = { padding ->
+
+            Column {
+                Text(text = matchCount.toString())
+            }
+
+
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Bottom,
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .fillMaxWidth()
+                    .padding(padding)
+            ) {
+                TextField(
+                    value = urlValue,
+                    onValueChange = { urlValue = it },
+                    label = { Text("Place the URL you want to check here") }
+                )
+            }
+
+            // Button
+            Column(
+                horizontalAlignment = Alignment.End,
+                verticalArrangement = Arrangement.Bottom,
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .fillMaxWidth()
+                    .padding(padding)
+            ) {
+                FloatingActionButton(
+                    onClick = {
+                        checkUrl(urlValue) { responseCount ->
+                            Log.d(TAG, "RESPONSE COUNT LAMBDA -> $responseCount")
+                            responseCount.let { matchCount = responseCount!! }
+                        }
+                        Log.d(TAG, "matchCount COUNT onClick -> $matchCount")
+                    },
+                    modifier = Modifier
+                        .padding(all = 15.dp)
+                ) {
+                    Text("Check url")
+                }
+            }
         }
-      }
-    }
-  )
+    )
 }
 
 // This function is given the user's input url.
 // Makes api request with the url address.
 @OptIn(DelicateCoroutinesApi::class)
-fun checkUrl(urlString: String) {
+fun checkUrl(urlString: String, countStateHandler: (Int?) -> Unit) {
 
-  // UrlCheckApi instance.
-  val urlCheckApi = RetrofitClient.getClient().create(SafeBrowsingLookupApi::class.java)
+    // UrlCheckApi instance.
+    val urlCheckApi = RetrofitClient.getClient().create(SafeBrowsingLookupApi::class.java)
 
-  // New ThreatEntry with user's url.
-  val threatEntryObject = ThreatEntry(url = urlString)
+    // New ThreatEntry with user's url.
+    val threatEntryObject = ThreatEntry(url = urlString)
 
-  // New list of ThreatEntry objects.
-  val threatEntryObjectList: List<ThreatEntry> = mutableListOf(threatEntryObject)
+    // New list of ThreatEntry objects.
+    val threatEntryObjectList: List<ThreatEntry> = mutableListOf(threatEntryObject)
 
-  // New ThreatInfo object including user's url.
-  val newThreatInfoObject = ThreatInfo(threatEntries = threatEntryObjectList)
+    // New ThreatInfo object including user's url.
+    val newThreatInfoObject = ThreatInfo(threatEntries = threatEntryObjectList)
 
-  // New LookupObject and api request with the said object.
-  val exceptionHandler = CoroutineExceptionHandler{_ , throwable->
-    throwable.printStackTrace()
-  }
-  try {
-    CoroutineScope(Dispatchers.IO +exceptionHandler).launch {
-      Log.d(TAG, "111111111")
-      val result = urlCheckApi
-        .makeUrlCheck(
-          LookupObject(
-            client = Client(),
-            threatInfo = newThreatInfoObject
-          )
-        ).execute()
-      Log.d(TAG, "result -> ${result.body()?.matches}")
-
+    // New LookupObject and api request with the said object.
+    val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
+        throwable.printStackTrace()
     }
-  } catch (e: java.lang.Exception) {
-    Log.d(TAG, "EX: $e")
-  }
+    try {
+        CoroutineScope(Dispatchers.IO + exceptionHandler).launch {
+            Log.d(TAG, "111111111")
+            val result = urlCheckApi
+                .makeUrlCheck(
+                    LookupObject(
+                        client = Client(),
+                        threatInfo = newThreatInfoObject
+                    )
+                ).execute()
+            Log.d(TAG, "result -> ${result.body()?.matches?.size}")
+            countStateHandler(result.body()?.matches?.size)
+        }
+    } catch (e: java.lang.Exception) {
+        Log.d(TAG, "EX: $e")
+    }
 
-
-
-  /**
-   * TODO: Pistä toimimaan ja tee coroutine versio.
-   */
-
-  // Yritän asettaa responsin ResponseModelin sisään ja tehä siitä uuden objektin.
-  // Näkee että antaa Call<ResponseModel> ja haluu listan
-  /*val resultt = result.body()?.let {
-    ResponseModel(
-    matches =  it.matches
-    )
-  }*/
-
-  //Log.d("Resultt in URLScreen: ", resultt.toString())
-  //Log.d("Resultt matches in URLScreen: ", resultt?.matches.toString())
-
-  /*
-  // Launching new coroutine.
-  // Should be done in normal suspend function/coroutineScope probably
-  GlobalScope.launch {
-      val result = urlCheckApi.makeUrlCheck(url)
-      if (result != null) {
-          Log.d("Results: ", result.body().toString())
-      }
-  }
-
-   */
 }
