@@ -15,7 +15,7 @@ object RetrofitClient {
 
   // Base URL pitää ehkä loppua / tai IllegalArgumentException
   //private val BASE_URL = "https://safebrowsing.googleapis.com/v4/threatMatches:find?key=${BuildConfig.SBL_API_KEY} HTTP/1.1/"
-  private val BASE_URL: String = "https://safebrowsing.googleapis.com/v4/"
+  private val BASE_URL: String = "https://safebrowsing.googleapis.com/v4/threatMatches:find/"
 
   // OkHttpClient
   // Consists all of the Interceptors

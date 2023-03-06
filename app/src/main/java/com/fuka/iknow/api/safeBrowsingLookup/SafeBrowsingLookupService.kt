@@ -1,11 +1,13 @@
 package com.fuka.iknow.api.safeBrowsingLookup
 
+import android.util.Log
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fuka.iknow.api.safeBrowsingLookup.objects.request.Client
 import com.fuka.iknow.api.safeBrowsingLookup.objects.request.LookupObject
 import com.fuka.iknow.api.safeBrowsingLookup.objects.request.ThreatInfo
 import com.fuka.iknow.api.safeBrowsingLookup.objects.response.ErrorResponse
 import com.fuka.iknow.api.safeBrowsingLookup.objects.response.ResponseModel
+import com.fuka.iknow.boradcast.reciever.TAG
 import okhttp3.ResponseBody
 
 class SafeBrowsingLookupService {
@@ -18,6 +20,7 @@ class SafeBrowsingLookupService {
   private val safeBrowsingLookupApi = retrofit.create(SafeBrowsingLookupApi::class.java)
 
   fun successfulSafeBrowsingLookupResponse() {
+    Log.d(TAG, " successfulSafeBrowsingLookupResponse 1")
     val safeBrowsingResponse = safeBrowsingLookupApi
       .makeUrlCheck(
         lookupObject = LookupObject(
@@ -26,6 +29,10 @@ class SafeBrowsingLookupService {
         )
       )
       .execute()
+
+    Log.d(TAG, " successfulSafeBrowsingLookupResponse 2")
+
+    Log.d(TAG, " safeBrowsingResponse ${safeBrowsingResponse}")
 
     val successful = safeBrowsingResponse.isSuccessful
     val httpStatusCode = safeBrowsingResponse.code()

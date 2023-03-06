@@ -11,7 +11,7 @@ import retrofit2.http.POST
 interface SafeBrowsingLookupApi {
 
   @Headers("Content-Type: application/json")
-  @POST("threatMatches:find?key=${BuildConfig.SBL_API_KEY}") // HTTP/1.1/
+  @POST("?key=${BuildConfig.SBL_API_KEY}") // HTTP/1.1/
   fun makeUrlCheck(
     @Body lookupObject: LookupObject
   ): Call<ResponseModel>

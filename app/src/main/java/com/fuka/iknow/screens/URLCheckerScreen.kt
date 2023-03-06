@@ -14,7 +14,8 @@ import com.fuka.iknow.api.safeBrowsingLookup.objects.request.LookupObject
 import com.fuka.iknow.api.safeBrowsingLookup.objects.request.ThreatEntry
 import com.fuka.iknow.api.safeBrowsingLookup.objects.request.ThreatInfo
 import com.fuka.iknow.api.safeBrowsingLookup.objects.response.ResponseModel
-import kotlinx.coroutines.DelicateCoroutinesApi
+import com.fuka.iknow.boradcast.reciever.TAG
+import kotlinx.coroutines.*
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -78,13 +79,27 @@ fun checkUrl(urlString: String) {
   val newThreatInfoObject = ThreatInfo(threatEntries = threatEntryObjectList)
 
   // New LookupObject and api request with the said object.
-  val result = urlCheckApi
-    .makeUrlCheck(
-      LookupObject(
-        client = Client(),
-        threatInfo = newThreatInfoObject
-      )
-    ).execute()
+  val exceptionHandler = CoroutineExceptionHandler{_ , throwable->
+    throwable.printStackTrace()
+  }
+  try {
+    CoroutineScope(Dispatchers.IO +exceptionHandler).launch {
+      Log.d(TAG, "111111111")
+      val result = urlCheckApi
+        .makeUrlCheck(
+          LookupObject(
+            client = Client(),
+            threatInfo = newThreatInfoObject
+          )
+        ).execute()
+      Log.d(TAG, "result -> ${result.body()?.matches}")
+
+    }
+  } catch (e: java.lang.Exception) {
+    Log.d(TAG, "EX: $e")
+  }
+
+
 
   /**
    * TODO: Pistä toimimaan ja tee coroutine versio.
@@ -92,14 +107,14 @@ fun checkUrl(urlString: String) {
 
   // Yritän asettaa responsin ResponseModelin sisään ja tehä siitä uuden objektin.
   // Näkee että antaa Call<ResponseModel> ja haluu listan
-  val resultt = result.body()?.let {
+  /*val resultt = result.body()?.let {
     ResponseModel(
     matches =  it.matches
     )
-  }
+  }*/
 
-  Log.d("Resultt in URLScreen: ", resultt.toString())
-  Log.d("Resultt matches in URLScreen: ", resultt?.matches.toString())
+  //Log.d("Resultt in URLScreen: ", resultt.toString())
+  //Log.d("Resultt matches in URLScreen: ", resultt?.matches.toString())
 
   /*
   // Launching new coroutine.
