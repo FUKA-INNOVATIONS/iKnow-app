@@ -13,7 +13,9 @@
 .externalNativeBuild
 .cxx
 local.properties
+apikey.properties
 .idea
 */.idea
 **/.idea
 ./.idea
+
