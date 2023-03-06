@@ -94,7 +94,7 @@ class MainActivity : ComponentActivity() {
         if (checkBiometricSupport()) {
             val biometricPrompt = android.hardware.biometrics.BiometricPrompt.Builder(this)
                 .apply {
-                    setTitle("Biometric login for iKnow")
+                    setTitle("Biometric login for iKnow") //todo add string
                     setSubtitle("Authenticate with your fingerprint")
                     setConfirmationRequired(false)
                     setNegativeButton("Cancel", mainExecutor, { _, _, ->
