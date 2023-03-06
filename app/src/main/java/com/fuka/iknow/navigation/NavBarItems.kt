@@ -7,7 +7,7 @@ object NavBarItems {
         BarItem(
             title = "Events",
             icon = R.drawable.ic_home_foreground,
-            route = "home"
+            route = "events"
         ),
         BarItem(
             title = "URLCheck",

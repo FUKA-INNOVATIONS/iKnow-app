@@ -10,6 +10,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -39,15 +40,10 @@ import com.fuka.iknow.viewModels.DatabaseViewModel
 @Composable
 fun NavigationPage() {
     val tabItems = NavBarItems.BarItems
-
     var selectedItem = remember { mutableStateOf(0) }
-
     var navController = rememberNavController()
-
     val navBackStackEntry = navController.currentBackStackEntryAsState()
-
     val parentRouteName = navBackStackEntry.value?.destination?.route
-
     val routeName = navBackStackEntry.value?.destination?.route
 
     Scaffold(
@@ -62,22 +58,6 @@ fun NavigationPage() {
                         overflow = TextOverflow.Ellipsis
                     )
                 },
-                /*navigationIcon = {
-                    IconButton(onClick = { /* doSomething() */ }) {
-                        Icon(
-                            imageVector = Icons.Filled.Menu,
-                            contentDescription = "Localized description"
-                        )
-                    }
-                },*/
-                /*actions = {
-                    IconButton(onClick = { /* doSomething() */ }) {
-                        Icon(
-                            imageVector = Icons.Filled.Favorite,
-                            contentDescription = "Localized description"
-                        )
-                    }
-                }*/
             )
         },
 
@@ -106,12 +86,27 @@ fun NavigationPage() {
                         },
                         icon = {
                             when (barItem.title) {
-                                "Events" -> Icon(Icons.Filled.Home, "Home screen navigation icon")
-                                "URLCheck" -> Icon(Icons.Filled.Search, "Search screen navigation icon")
-                                "Settings" -> Icon(Icons.Filled.Settings, "Settings navigation icon")
+                                "Events" -> Icon(
+                                    Icons.Filled.List, "Home screen navigation icon",
+                                    tint = if (selectedItem.value == 0) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.secondary
+                                )
+                                "URLCheck" -> Icon(
+                                    Icons.Filled.Search, "Search screen navigation icon",
+                                    tint = if (selectedItem.value == 1) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.secondary
+                                )
+                                "Settings" -> Icon(
+                                    Icons.Filled.Settings, "Settings navigation icon",
+                                    tint = if (selectedItem.value == 2) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.secondary
+                                )
                             }
                         },
-                        label = { Text(text = barItem.title, maxLines = 1, overflow = TextOverflow.Ellipsis) } //
+                        label = {
+                            Text(
+                                text = barItem.title,
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis
+                            )
+                        } //
                     )
                 }
             }
