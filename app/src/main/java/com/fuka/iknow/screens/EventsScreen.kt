@@ -19,6 +19,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.fuka.iknow.R
+import com.fuka.iknow.UiText
 import com.fuka.iknow.viewModels.DatabaseViewModel
 import com.fuka.iknow.viewModels.TAG
 
@@ -44,15 +46,15 @@ fun HomeScreen() {
             .fillMaxWidth()
             .padding(start = 15.dp, end = 15.dp), horizontalArrangement = Arrangement.SpaceBetween) {
             OutlinedButton(onClick = { activeList = airplaneModeList }, colors = ButtonDefaults.buttonColors(contentColor = airplaneBtnActive)) {
-                Text(text = "Airplane mode")
+                Text(text = UiText.StringResource(resId = R.string.airplane_mode).asString())
             }
 
             OutlinedButton(onClick = { activeList = batteryLevelList }, colors = ButtonDefaults.buttonColors(contentColor = batteryBtnActive)) {
-                Text(text = "Battery level")
+                Text(text = UiText.StringResource(resId = R.string.battery_level).asString())
             }
 
             OutlinedButton(onClick = { activeList = broadcastActionList }, colors = ButtonDefaults.buttonColors(contentColor = showAlBtnActive)) {
-                Text(text = "Show all")
+                Text(text = UiText.StringResource(resId = R.string.show_all).asString())
             }
         }
 
@@ -92,7 +94,7 @@ fun HomeScreen() {
                                 trailingContent = {
                                     Icon(
                                         Icons.Filled.Delete,
-                                        contentDescription = "Delete Airplane mode event icon",
+                                        contentDescription = UiText.StringResource(resId = R.string.airplane_mode_event_icon_deletion).asString(),
                                         tint = MaterialTheme.colorScheme.outline,
                                         modifier = Modifier.clickable {
                                             viewModel.deleteBroadcastAction(it)

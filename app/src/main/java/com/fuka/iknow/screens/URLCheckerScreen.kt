@@ -7,6 +7,8 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.fuka.iknow.R
+import com.fuka.iknow.UiText
 import com.fuka.iknow.api.safeBrowsingLookup.RetrofitClient
 import com.fuka.iknow.api.safeBrowsingLookup.SafeBrowsingLookupApi
 import com.fuka.iknow.api.safeBrowsingLookup.objects.request.Client
@@ -22,8 +24,6 @@ import kotlinx.coroutines.*
 fun URLCheckerScreen() {
     var urlValue by remember { mutableStateOf("") }
     var matchCount by remember { mutableStateOf(0) }
-
-    Text(text = "This is URLChecker")
 
     Scaffold(
         content = { padding ->
@@ -44,7 +44,7 @@ fun URLCheckerScreen() {
                 TextField(
                     value = urlValue,
                     onValueChange = { urlValue = it },
-                    label = { Text("Place the URL you want to check here") }
+                    label = { Text(UiText.StringResource(resId = R.string.url_textField_label).asString()) }
                 )
             }
 
@@ -68,7 +68,7 @@ fun URLCheckerScreen() {
                     modifier = Modifier
                         .padding(all = 15.dp)
                 ) {
-                    Text("Check url")
+                    Text(UiText.StringResource(resId = R.string.url_submit_button).asString())
                 }
             }
         }

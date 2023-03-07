@@ -23,18 +23,16 @@ import androidx.navigation.navOptions
 import androidx.navigation.navigation
 import androidx.navigation.navigation
 import com.fuka.iknow.R
+import com.fuka.iknow.UiText
 import com.fuka.iknow.screens.HomeScreen
 import com.fuka.iknow.screens.SettingsScreen
 import com.fuka.iknow.screens.URLCheckerScreen
 import com.fuka.iknow.viewModels.DatabaseViewModel
 
 
-/**
- * TODO: Raise navigation icons above the navigation labels.
- * TODO: Implement stack navigation to API screen.
+/***
+ * TODO: string resources
  */
-
-// TODO: fix material theme reference, dependencies, split code into separate files...
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -44,30 +42,16 @@ fun NavigationPage() {
     var navController = rememberNavController()
     val navBackStackEntry = navController.currentBackStackEntryAsState()
     val parentRouteName = navBackStackEntry.value?.destination?.route
-    val routeName = navBackStackEntry.value?.destination?.route
+    //val routeName = navBackStackEntry.value?.destination?.route
 
     Scaffold(
-        // Top app bar.
-        // In this file if navigation is added in the future.
-        topBar = {
-            CenterAlignedTopAppBar(
-                title = {
-                    Text(
-                        "$routeName",
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
-                    )
-                },
-            )
-        },
-
         // Bottom navigation bar.
         // Bottom bar uses composable NavigationBar.
         bottomBar = {
             NavigationBar(
                 modifier = Modifier
                     .height(75.dp)
-                    .background(color = MaterialTheme.colorScheme.secondary) // TODO: fix material theme reference
+                    .background(color = MaterialTheme.colorScheme.secondary)
             ) {
                 tabItems.forEachIndexed { index, barItem ->
 
@@ -87,15 +71,15 @@ fun NavigationPage() {
                         icon = {
                             when (barItem.title) {
                                 "Events" -> Icon(
-                                    Icons.Filled.List, "Home screen navigation icon",
+                                    Icons.Filled.List, UiText.StringResource(resId = R.string.home_screen_navigation_icon).asString(),
                                     tint = if (selectedItem.value == 0) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.secondary
                                 )
                                 "URLCheck" -> Icon(
-                                    Icons.Filled.Search, "Search screen navigation icon",
+                                    Icons.Filled.Search, UiText.StringResource(resId = R.string.url_check_screen_navigation_icon).asString(),
                                     tint = if (selectedItem.value == 1) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.secondary
                                 )
                                 "Settings" -> Icon(
-                                    Icons.Filled.Settings, "Settings navigation icon",
+                                    Icons.Filled.Settings, UiText.StringResource(resId = R.string.settings_screen_navigation_icon).asString(),
                                     tint = if (selectedItem.value == 2) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.secondary
                                 )
                             }
@@ -106,7 +90,7 @@ fun NavigationPage() {
                                 maxLines = 1,
                                 overflow = TextOverflow.Ellipsis
                             )
-                        } //
+                        }
                     )
                 }
             }

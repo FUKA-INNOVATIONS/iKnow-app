@@ -1,3 +1,61 @@
 <resources>
     <string name="app_name">iKnow</string>
+
+    <!-- Navigation -->
+    <string name="events_tab">Eventdsds</string>
+    <string name="URLCheck_tab">URLCheck</string>
+    <string name="settings_tab">Settings</string>
+
+    <!-- Navigation content description -->
+    <string name="home_screen_navigation_icon">Home screen navigation icon</string>
+    <string name="url_check_screen_navigation_icon">Search screen navigation icon</string>
+    <string name="settings_screen_navigation_icon">Settings navigation icon</string>
+    <!-- TODO: This -->
+
+    <!-- Airplane Broadcast Receiver -->
+    <string name="tag">iKnow-app</string>
+    <string name="airplane_mode_changed_notification">Airplane mode changed</string>
+    <string name="action">Action: </string>
+    <string name="uri">URI: </string>
+
+    <!-- Airplane Broadcast Receiver content description -->
+    <!-- TODO: This -->
+
+    <!-- LoginScreen -->
+    <string name="authenticate">Authenticate</string>
+    <string name="biometric_auth_title">Biometric login for iKnow</string>
+    <string name="biometric_auth_description">Authenticate with your fingerprint</string>
+    <string name="authentication_success">Authentication Succeeded</string>
+    <string name="authentication_error">Authentication Error code: </string>
+    <string name="cancel_authentication">Cancel</string>
+    <string name="authentication_cancelled">Authentication Cancelled</string>
+    <string name="authentication_cancelled_signal">Authentication Cancelled Signal</string>
+
+    <!-- EventsScreen content description -->
+    <!-- TODO: This -->
+
+    <!-- EventsScreen -->
+    <string name="airplane_mode">Airplane mode</string>
+    <string name="battery_level">Battery level</string>
+    <string name="show_all">Show all</string>
+
+    <!-- EventsScreen content description -->
+    <string name="airplane_mode_event_icon_deletion">Delete Airplane mode event icon</string>
+    <!-- TODO: This -->
+
+    <!-- URLCheckScreen -->
+    <string name="url_textField_label">Place the URL you want to check here</string>
+    <string name="url_submit_button">Check URL</string>
+
+    <!-- EventsScreen content description -->
+    <!-- TODO: This -->
+
+    <!-- SettingsScreen -->
+    <!-- <string name=""></string>
+    <string name=""></string>
+    <string name=""></string> -->
+    <!-- TODO: This -->
+
+    <!-- EventsScreen content description -->
+    <!-- TODO: This -->
 </resources>

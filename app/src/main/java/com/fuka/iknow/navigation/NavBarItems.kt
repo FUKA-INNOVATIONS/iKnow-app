@@ -1,6 +1,13 @@
 package com.fuka.iknow.navigation
 
 import com.fuka.iknow.R
+import com.fuka.iknow.UiText
+
+/***
+ * TODO: string resources
+ */
+// Doesn't work
+// UiText.StringResource(resId = R.string.events_tab),
 
 object NavBarItems {
     val BarItems = listOf(

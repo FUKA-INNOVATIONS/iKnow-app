@@ -16,6 +16,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.compose.material3.*
+import androidx.compose.runtime.Composable
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.fuka.iknow.boradcast.reciever.AirPlaneBroadcastReceiver
@@ -52,7 +53,10 @@ class MainActivity : ComponentActivity() {
         object : android.hardware.biometrics.BiometricPrompt.AuthenticationCallback() {
             override fun onAuthenticationSucceeded(result: android.hardware.biometrics.BiometricPrompt.AuthenticationResult?) {
                 super.onAuthenticationSucceeded(result)
-                Toast.makeText(this@MainActivity, "Authentication Succeeded", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this@MainActivity,
+                    getText(R.string.authentication_success),
+                    Toast.LENGTH_SHORT).show()
                 setContent {
                     IKnowTheme {
                         NavigationPage()
@@ -62,7 +66,10 @@ class MainActivity : ComponentActivity() {
 
             override fun onAuthenticationError(errorCode: Int, errString: CharSequence?) {
                 super.onAuthenticationError(errorCode, errString)
-                Toast.makeText(this@MainActivity, "Authentication Error code: $errorCode", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this@MainActivity,
+                    getText(R.string.authentication_error),
+                    Toast.LENGTH_SHORT).show()
             }
 
             override fun onAuthenticationFailed() {
@@ -93,11 +100,14 @@ class MainActivity : ComponentActivity() {
         if (checkBiometricSupport()) {
             val biometricPrompt = android.hardware.biometrics.BiometricPrompt.Builder(this)
                 .apply {
-                    setTitle("Biometric login for iKnow") //todo add string
-                    setSubtitle("Authenticate with your fingerprint")
+                    setTitle(getText(R.string.biometric_auth_title))
+                    setSubtitle(getText(R.string.biometric_auth_description))
                     setConfirmationRequired(false)
-                    setNegativeButton("Cancel", mainExecutor, { _, _, ->
-                        Toast.makeText(this@MainActivity, "Authentication Cancelled", Toast.LENGTH_SHORT).show()
+                    setNegativeButton(getText(R.string.cancel_authentication), mainExecutor, { _, _, ->
+                        Toast.makeText(
+                            this@MainActivity,
+                            getText(R.string.authentication_cancelled),
+                            Toast.LENGTH_SHORT).show()
                     })
                 }.build()
             biometricPrompt.authenticate(getCancellationSignal(), mainExecutor, authenticationCallback)
@@ -107,7 +117,10 @@ class MainActivity : ComponentActivity() {
     private fun getCancellationSignal(): CancellationSignal {
         cancellationSignal = CancellationSignal()
         cancellationSignal?.setOnCancelListener {
-            Toast.makeText(this, "Authentication Cancelled Signal", Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                this,
+                getText(R.string.authentication_cancelled_signal),
+                Toast.LENGTH_SHORT).show()
         }
 
         return cancellationSignal as CancellationSignal
