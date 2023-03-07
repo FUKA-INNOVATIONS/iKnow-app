@@ -2,6 +2,7 @@ package com.fuka.iknow.screens
 
 import android.app.Application
 import android.util.Log
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -16,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.fuka.iknow.viewModels.DatabaseViewModel
 import com.fuka.iknow.viewModels.TAG
@@ -32,19 +34,24 @@ fun HomeScreen() {
 
     var activeList by remember { mutableStateOf(broadcastActionList) }
 
+    val airplaneBtnActive = if (activeList == airplaneModeList) MaterialTheme.colorScheme.inversePrimary else MaterialTheme.colorScheme.onPrimary
+    val batteryBtnActive = if (activeList == batteryLevelList) MaterialTheme.colorScheme.inversePrimary else MaterialTheme.colorScheme.onPrimary
+    val showAlBtnActive = if (activeList == broadcastActionList) MaterialTheme.colorScheme.inversePrimary else MaterialTheme.colorScheme.onPrimary
+
+
     Column {
         Row(modifier = Modifier
             .fillMaxWidth()
             .padding(start = 15.dp, end = 15.dp), horizontalArrangement = Arrangement.SpaceBetween) {
-            OutlinedButton(onClick = { activeList = airplaneModeList }) {
+            OutlinedButton(onClick = { activeList = airplaneModeList }, colors = ButtonDefaults.buttonColors(contentColor = airplaneBtnActive)) {
                 Text(text = "Airplane mode")
             }
 
-            OutlinedButton(onClick = { activeList = batteryLevelList }) {
+            OutlinedButton(onClick = { activeList = batteryLevelList }, colors = ButtonDefaults.buttonColors(contentColor = batteryBtnActive)) {
                 Text(text = "Battery level")
             }
 
-            OutlinedButton(onClick = { activeList = broadcastActionList }) {
+            OutlinedButton(onClick = { activeList = broadcastActionList }, colors = ButtonDefaults.buttonColors(contentColor = showAlBtnActive)) {
                 Text(text = "Show all")
             }
         }
