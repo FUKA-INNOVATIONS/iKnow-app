@@ -35,7 +35,7 @@ fun HomeScreen() {
     Column {
         Row(modifier = Modifier
             .fillMaxWidth()
-            .padding(bottom = 15.dp), horizontalArrangement = Arrangement.SpaceBetween) {
+            .padding(start = 15.dp, end = 15.dp), horizontalArrangement = Arrangement.SpaceBetween) {
             OutlinedButton(onClick = { activeList = airplaneModeList }) {
                 Text(text = "Airplane mode")
             }
@@ -45,7 +45,7 @@ fun HomeScreen() {
             }
 
             OutlinedButton(onClick = { activeList = broadcastActionList }) {
-                Text(text = "Display all")
+                Text(text = "All")
             }
         }
 
@@ -59,13 +59,6 @@ fun HomeScreen() {
                     contentPadding = PaddingValues(bottom = 15.dp)
                 ) {
                     items(activeList.value) {
-
-                        /* var statusColor by remember { // change list item status icon color based on status: either true (unchecked/red) or false (checked/blue)
-                            mutableStateOf(if (it.status) Color.Gray else Color.LightGray)
-                        } */
-
-                        //Spacer(modifier = Modifier.height(20.dp))
-
                         Column(
                             horizontalAlignment = Alignment.CenterHorizontally,
                             modifier = Modifier
@@ -78,17 +71,17 @@ fun HomeScreen() {
                                 headlineText = { Text(it.type) },
                                 //overlineText = { Text(it.type) },
                                 supportingText = { Text(it.timestamp) },
-                                leadingContent = {
+                                /*leadingContent = {
                                     Icon(
                                         Icons.Filled.CheckCircle,
-                                        contentDescription = "Airplane mode event item status icon",
+                                        contentDescription = "Event item status icon",
                                         tint = if (it.status) Color.Gray else Color.LightGray, // TODO: list item is not updated on status change
                                         modifier = Modifier.clickable {
                                             Log.d(TAG, "it.hashCode: ${it.intentHashcode.toString()}")
                                             viewModel.changeBroadcastActionStatus(it)
                                         }
                                     )
-                                },
+                                },*/
                                 trailingContent = {
                                     Icon(
                                         Icons.Filled.Delete,
