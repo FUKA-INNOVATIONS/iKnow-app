@@ -26,21 +26,25 @@ import com.fuka.iknow.viewModels.TAG
 fun HomeScreen() {
     val context = LocalContext.current
     val viewModel = DatabaseViewModel(context.applicationContext as Application)
-    val broadcastActionList = viewModel.getBroadcastActions().observeAsState(listOf())
+    var broadcastActionList = viewModel.getBroadcastActions().observeAsState(listOf())
+    var batteryLevelList = viewModel.getBroadcastActionsByType("batteryLow").observeAsState(listOf())
+    var airplaneModeList = viewModel.getBroadcastActionsByType("airplaneMode").observeAsState(listOf())
 
-
+    var activeList by remember { mutableStateOf(broadcastActionList) }
 
     Column {
-        Row(modifier = Modifier.fillMaxWidth().padding(bottom = 15.dp), horizontalArrangement = Arrangement.SpaceBetween) {
-            OutlinedButton(onClick = { /*TODO*/ }) {
+        Row(modifier = Modifier
+            .fillMaxWidth()
+            .padding(bottom = 15.dp), horizontalArrangement = Arrangement.SpaceBetween) {
+            OutlinedButton(onClick = { activeList = airplaneModeList }) {
                 Text(text = "Airplane mode")
             }
 
-            OutlinedButton(onClick = { /*TODO*/ }) {
+            OutlinedButton(onClick = { activeList = batteryLevelList }) {
                 Text(text = "Battery level")
             }
 
-            OutlinedButton(onClick = { /*TODO*/ }) {
+            OutlinedButton(onClick = { activeList = broadcastActionList }) {
                 Text(text = "Display all")
             }
         }
@@ -52,15 +56,15 @@ fun HomeScreen() {
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(padding),
-                    contentPadding = PaddingValues(bottom = 15.dp, top = 10.dp)
+                    contentPadding = PaddingValues(bottom = 15.dp)
                 ) {
-                    items(broadcastActionList.value) {
+                    items(activeList.value) {
 
                         /* var statusColor by remember { // change list item status icon color based on status: either true (unchecked/red) or false (checked/blue)
                             mutableStateOf(if (it.status) Color.Gray else Color.LightGray)
                         } */
 
-                        Spacer(modifier = Modifier.height(20.dp))
+                        //Spacer(modifier = Modifier.height(20.dp))
 
                         Column(
                             horizontalAlignment = Alignment.CenterHorizontally,
@@ -80,10 +84,7 @@ fun HomeScreen() {
                                         contentDescription = "Airplane mode event item status icon",
                                         tint = if (it.status) Color.Gray else Color.LightGray, // TODO: list item is not updated on status change
                                         modifier = Modifier.clickable {
-                                            Log.d(
-                                                TAG,
-                                                "it.hashCode: ${it.intentHashcode.toString()}"
-                                            )
+                                            Log.d(TAG, "it.hashCode: ${it.intentHashcode.toString()}")
                                             viewModel.changeBroadcastActionStatus(it)
                                         }
                                     )
