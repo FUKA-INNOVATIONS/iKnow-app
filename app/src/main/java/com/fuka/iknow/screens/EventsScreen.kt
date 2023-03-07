@@ -45,7 +45,7 @@ fun HomeScreen() {
             }
 
             OutlinedButton(onClick = { activeList = broadcastActionList }) {
-                Text(text = "All")
+                Text(text = "Show all")
             }
         }
 
