@@ -6,7 +6,10 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.airbnb.lottie.compose.*
+import com.fuka.iknow.R
 import com.fuka.iknow.api.safeBrowsingLookup.RetrofitClient
 import com.fuka.iknow.api.safeBrowsingLookup.SafeBrowsingLookupApi
 import com.fuka.iknow.api.safeBrowsingLookup.objects.request.Client
@@ -15,6 +18,7 @@ import com.fuka.iknow.api.safeBrowsingLookup.objects.request.ThreatEntry
 import com.fuka.iknow.api.safeBrowsingLookup.objects.request.ThreatInfo
 import com.fuka.iknow.api.safeBrowsingLookup.objects.response.ResponseModel
 import com.fuka.iknow.boradcast.reciever.TAG
+import com.fuka.iknow.ui.theme.IKnowTheme
 import kotlinx.coroutines.*
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -23,56 +27,43 @@ fun URLCheckerScreen() {
     var urlValue by remember { mutableStateOf("") }
     var matchCount by remember { mutableStateOf(0) }
 
-    Text(text = "This is URLChecker")
+    val composition by rememberLottieComposition(
+        LottieCompositionSpec
+            .RawRes(R.raw.secure)
+    )
+    val progress by animateLottieCompositionAsState(
+        composition,
+        iterations = LottieConstants.IterateForever
+    )
 
-    Scaffold(
-        content = { padding ->
+    IKnowTheme {
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            //Text(text = matchCount.toString())
+            LottieAnimation(
+                composition,
+                progress,
+                modifier = Modifier.size(400.dp)
+            )
 
-            Column {
-                Text(text = matchCount.toString())
-            }
+            TextField(
+                value = urlValue,
+                onValueChange = { urlValue = it },
+                label = { Text("Place the URL you want to check here") }
+            )
 
+            Spacer(modifier = Modifier.size(30.dp))
 
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Bottom,
-                modifier = Modifier
-                    .fillMaxHeight()
-                    .fillMaxWidth()
-                    .padding(padding)
-            ) {
-                TextField(
-                    value = urlValue,
-                    onValueChange = { urlValue = it },
-                    label = { Text("Place the URL you want to check here") }
-                )
-            }
-
-            // Button
-            Column(
-                horizontalAlignment = Alignment.End,
-                verticalArrangement = Arrangement.Bottom,
-                modifier = Modifier
-                    .fillMaxHeight()
-                    .fillMaxWidth()
-                    .padding(padding)
-            ) {
-                FloatingActionButton(
-                    onClick = {
-                        checkUrl(urlValue) { responseCount ->
-                            Log.d(TAG, "RESPONSE COUNT LAMBDA -> $responseCount")
-                            responseCount.let { matchCount = responseCount!! }
-                        }
-                        Log.d(TAG, "matchCount COUNT onClick -> $matchCount")
-                    },
-                    modifier = Modifier
-                        .padding(all = 15.dp)
-                ) {
-                    Text("Check url")
+            Button(onClick = {
+                checkUrl(urlValue) { responseCount ->
+                    Log.d(TAG, "RESPONSE COUNT LAMBDA -> $responseCount")
+                    responseCount.let { matchCount = responseCount!! }
                 }
+                Log.d(TAG, "matchCount COUNT onClick -> $matchCount")
+            }) {
+                Text(text = "Check url", textAlign = TextAlign.Center)
             }
         }
-    )
+    }
 }
 
 // This function is given the user's input url.
