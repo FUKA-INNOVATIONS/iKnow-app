@@ -19,7 +19,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.core.content.res.TypedArrayUtils.getText
-import com.fuka.iknow.R
 import com.fuka.iknow.UiText
 import com.fuka.iknow.ui.theme.IKnowTheme
 import kotlin.math.max
@@ -57,14 +56,14 @@ fun LoginScreen(onClick: () -> Unit) {
                     }
                 )
             }
-        ){
+        ) {
             Box(
                 modifier = Modifier
                     .padding(it)
                     .fillMaxSize()
             )
         }
-        Column (
+        Column(
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
@@ -73,6 +72,7 @@ fun LoginScreen(onClick: () -> Unit) {
             Text(
                 text = UiText.StringResource(resId = R.string.app_name).asString(),
                 textAlign = TextAlign.Center
+            )
 
             LottieAnimation(
                 composition,
@@ -84,15 +84,16 @@ fun LoginScreen(onClick: () -> Unit) {
             Spacer(modifier = Modifier.size(30.dp))
 
 
-            Button(onClick = {onClick()}, shape = CutCornerShape(19)) {
+            Button(onClick = { onClick() }, shape = CutCornerShape(19)) {
                 Text(
                     text = UiText.StringResource(resId = R.string.authenticate).asString(),
                     textAlign = TextAlign.Center
                 )
 
-            Button(onClick = {onClick()}) {
-                Text(text = "Authenticate", textAlign = TextAlign.Center)
+                Button(onClick = { onClick() }) {
+                    Text(text = "Authenticate", textAlign = TextAlign.Center)
 
+                }
             }
         }
     }
