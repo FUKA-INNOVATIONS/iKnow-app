@@ -7,9 +7,13 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageManager
+import android.net.wifi.WifiInfo
+import android.net.wifi.WifiManager
+import android.net.wifi.WifiSsid
 import android.os.Build
 import android.os.Bundle
 import android.os.CancellationSignal
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -19,8 +23,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.fuka.iknow.boradcast.reciever.AirPlaneBroadcastReceiver
-import com.fuka.iknow.boradcast.reciever.BatteryLevelBroadcastReceiver
+import com.fuka.iknow.boradcast.reciever.*
 import com.fuka.iknow.navigation.NavigationPage
 import com.fuka.iknow.screens.LoginScreen
 import com.fuka.iknow.ui.theme.IKnowTheme
@@ -33,6 +36,8 @@ class MainActivity : ComponentActivity() {
 
     private lateinit var brAirplane: BroadcastReceiver
     private lateinit var brBattery: BroadcastReceiver
+    private lateinit var brWifiState: BroadcastReceiver
+    private lateinit var brWifiId: BroadcastReceiver
     private var cancellationSignal: CancellationSignal? = null
 
     @RequiresApi(Build.VERSION_CODES.Q)
@@ -130,9 +135,14 @@ class MainActivity : ComponentActivity() {
         super.onResume()
         brAirplane = AirPlaneBroadcastReceiver()
         brBattery = BatteryLevelBroadcastReceiver()
+        brWifiState = NetworkStateChangedBroadcastReceiver()
+        brWifiId = NetworkIdChangedBroadcastReceiver()
 
         val filterAirplane = IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED)
         val filterBatteryLow = IntentFilter(Intent.ACTION_BATTERY_LOW)
+        val filterNetworkStateChanged = IntentFilter(WifiManager.NETWORK_STATE_CHANGED_ACTION)
+        val filterNetworkIdChanged = IntentFilter(WifiManager.NETWORK_IDS_CHANGED_ACTION)
+
         val listenToBroadcastsFromOtherApps = false
         val receiverFlags =
             if (listenToBroadcastsFromOtherApps) { ContextCompat.RECEIVER_EXPORTED }
@@ -140,6 +150,8 @@ class MainActivity : ComponentActivity() {
 
         ContextCompat.registerReceiver(this, brAirplane, filterAirplane, receiverFlags)
         ContextCompat.registerReceiver(this, brBattery, filterBatteryLow, receiverFlags)
+        ContextCompat.registerReceiver(this, brWifiState, filterNetworkStateChanged, receiverFlags)
+        ContextCompat.registerReceiver(this, brWifiId, filterNetworkIdChanged, receiverFlags)
 
     }
 

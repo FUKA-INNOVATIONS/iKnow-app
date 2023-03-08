@@ -30,7 +30,12 @@
         </activity>
 
         <receiver android:name=".boradcast.reciever.BroadcastActionNotificationReceiver" />
-        <receiver android:name=".boradcast.reciever.AirPlaneBroadcastReceiver" />
+        <receiver android:name=".boradcast.reciever.AirPlaneBroadcastReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.USER_PRESENT" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

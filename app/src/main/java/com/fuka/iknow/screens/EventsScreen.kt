@@ -10,6 +10,10 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material.icons.outlined.Edit
+import androidx.compose.material.icons.outlined.Email
+import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
@@ -18,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.fuka.iknow.R
 import com.fuka.iknow.UiText
@@ -33,11 +38,13 @@ fun HomeScreen() {
     var broadcastActionList = viewModel.getBroadcastActions().observeAsState(listOf())
     var batteryLevelList = viewModel.getBroadcastActionsByType("batteryLow").observeAsState(listOf())
     var airplaneModeList = viewModel.getBroadcastActionsByType("airplaneMode").observeAsState(listOf())
+    var wifiStateList = viewModel.getBroadcastActionsByType("WifiStateChanged").observeAsState(listOf())
 
     var activeList by remember { mutableStateOf(broadcastActionList) }
 
     val airplaneBtnActive = if (activeList == airplaneModeList) MaterialTheme.colorScheme.inversePrimary else MaterialTheme.colorScheme.onPrimary
     val batteryBtnActive = if (activeList == batteryLevelList) MaterialTheme.colorScheme.inversePrimary else MaterialTheme.colorScheme.onPrimary
+    val wifiBtnActive = if (activeList == wifiStateList) MaterialTheme.colorScheme.inversePrimary else MaterialTheme.colorScheme.onPrimary
     val showAlBtnActive = if (activeList == broadcastActionList) MaterialTheme.colorScheme.inversePrimary else MaterialTheme.colorScheme.onPrimary
 
 
@@ -55,6 +62,18 @@ fun HomeScreen() {
 
             OutlinedButton(onClick = { activeList = broadcastActionList }, colors = ButtonDefaults.buttonColors(contentColor = showAlBtnActive)) {
                 Text(text = UiText.StringResource(resId = R.string.show_all).asString())
+                Text(text = "Airplane")
+            }
+
+            OutlinedButton(onClick = { activeList = batteryLevelList }, colors = ButtonDefaults.buttonColors(contentColor = batteryBtnActive)) {
+                Text(text = "Battery")
+            }
+            OutlinedButton(onClick = { activeList = wifiStateList }, colors = ButtonDefaults.buttonColors(contentColor = wifiBtnActive)) {
+                Text(text = "Wifi state")
+            }
+
+            OutlinedButton(onClick = { activeList = broadcastActionList }, colors = ButtonDefaults.buttonColors(contentColor = showAlBtnActive)) {
+                Text(text = "All")
             }
         }
 

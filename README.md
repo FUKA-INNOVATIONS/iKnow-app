@@ -1,5 +1,10 @@
 # iKnow-app
-Adroid app that keeps track of important privacy and cuber security related events.
+Adroid app that keeps track of important privacy and cyber security related events.
+
+
+Install
+
+- apikey.properties file
 
 
 
