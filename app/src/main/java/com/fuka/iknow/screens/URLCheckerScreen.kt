@@ -25,45 +25,89 @@ import kotlinx.coroutines.*
 @Composable
 fun URLCheckerScreen() {
     var urlValue by remember { mutableStateOf("") }
-    var matchCount by remember { mutableStateOf(0) }
+    var matchCount by remember { mutableStateOf<Int?>(null) }
 
-    val composition by rememberLottieComposition(
+    val noSearchAnimation by rememberLottieComposition(
         LottieCompositionSpec
             .RawRes(R.raw.secure)
     )
-    val progress by animateLottieCompositionAsState(
-        composition,
+
+    val noSearchAnimationProgress by animateLottieCompositionAsState(
+        noSearchAnimation,
         iterations = LottieConstants.IterateForever
     )
 
-    IKnowTheme {
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            //Text(text = matchCount.toString())
+    val safeSearchAnimation by rememberLottieComposition(
+        LottieCompositionSpec
+            .RawRes(R.raw.secure2)
+    )
+
+    val safeSearchAnimationProgress by animateLottieCompositionAsState(
+        noSearchAnimation,
+        iterations = 1
+    )
+
+    val notSafeSearchAnimation by rememberLottieComposition(
+        LottieCompositionSpec
+            .RawRes(R.raw.warning)
+    )
+
+    val notSafeSearchAnimationProgress by animateLottieCompositionAsState(
+        noSearchAnimation,
+        iterations = 1
+    )
+
+    Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.SpaceBetween) {
+
+        if (matchCount == null) { // no searches yet
+
             LottieAnimation(
-                composition,
-                progress,
+                noSearchAnimation,
+                noSearchAnimationProgress,
                 modifier = Modifier.size(400.dp)
             )
 
-            TextField(
-                value = urlValue,
-                onValueChange = { urlValue = it },
-                label = { Text("Place the URL you want to check here") }
+        } else if (matchCount == 0) { // No matches, given URL is safe
+
+            LottieAnimation(
+                safeSearchAnimation,
+                safeSearchAnimationProgress,
+                modifier = Modifier.size(400.dp)
             )
 
-            Spacer(modifier = Modifier.size(30.dp))
+        } else if (matchCount!! > 0 ) { // Found matches, given URL is not safe
 
-            Button(onClick = {
-                checkUrl(urlValue) { responseCount ->
-                    Log.d(TAG, "RESPONSE COUNT LAMBDA -> $responseCount")
-                    responseCount.let { matchCount = responseCount!! }
-                }
-                Log.d(TAG, "matchCount COUNT onClick -> $matchCount")
-            }) {
-                Text(text = "Check url", textAlign = TextAlign.Center)
-            }
+            LottieAnimation(
+                notSafeSearchAnimation,
+                notSafeSearchAnimationProgress,
+                modifier = Modifier.size(400.dp)
+            )
+
         }
+
+        TextField(
+            value = urlValue,
+            onValueChange = { urlValue = it },
+            label = { Text("Place the URL you want to check here") },
+            maxLines = 1
+        )
+
+
+
+        Button(onClick = {
+            checkUrl(urlValue) { responseCount ->
+                Log.d(TAG, "RESPONSE COUNT LAMBDA -> $responseCount")
+                //responseCount.let { matchCount = responseCount!! }
+                matchCount = responseCount ?: 0
+            }
+            Log.d(TAG, "matchCount COUNT onClick -> $matchCount")
+        }) {
+            Text(text = "Check url", textAlign = TextAlign.Center)
+        }
+
+        Spacer(modifier = Modifier.size(30.dp))
     }
+
 }
 
 // This function is given the user's input url.
