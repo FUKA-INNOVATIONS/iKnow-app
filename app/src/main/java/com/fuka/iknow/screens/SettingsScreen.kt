@@ -1,5 +1,6 @@
 package com.fuka.iknow.screens
 
+import android.app.Application
 import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -22,9 +23,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import com.fuka.iknow.ui.theme.IKnowTheme
+import com.fuka.iknow.viewModels.DatabaseViewModel
 
 @Composable
 fun SettingsScreen() {
+
     IKnowTheme {
         Column (
             modifier = Modifier.fillMaxSize(),
@@ -67,6 +70,7 @@ fun DeleteConfirmation(
     onDismiss: () -> Unit
 ) {
     val context = LocalContext.current.applicationContext
+    val viewModel = DatabaseViewModel(context as Application)
 
     val interactionSource = remember {
         MutableInteractionSource()
@@ -169,7 +173,8 @@ fun DeleteConfirmation(
                         Text(
                             text = "Delete",
                             style = buttonTextStyle,
-                            color = Color.White
+                            color = Color.White,
+                            modifier = Modifier.clickable { viewModel.deleteAllBroadcastActions() }
                         )
                     }
 

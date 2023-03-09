@@ -83,4 +83,10 @@ class DatabaseViewModel(application: Application) : AndroidViewModel(application
         }
     }
 
+    fun deleteAllBroadcastActions() {
+        viewModelScope.launch(Dispatchers.IO) {
+            db.iKnowDao().deleteAll()
+        }
+    }
+
 }
