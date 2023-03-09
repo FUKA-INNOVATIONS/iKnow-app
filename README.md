@@ -13,7 +13,7 @@ Known buggs
 - User must enable fingerprin inorder to use the app
 - Filtering events > Should be dropdown and dynamic
 - Delete all events > Show success message and close dialog box
-- Donät start searching for URL vulernabilites when TextInput is empty
+- Don't start searching for URL vulernabilites when TextInput is empty
 - UI improvements > Not symmetric..
 
 
