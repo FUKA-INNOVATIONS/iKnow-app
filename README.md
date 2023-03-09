@@ -14,6 +14,7 @@ Known buggs
 - Filtering events > Should be dropdown and dynamic
 - Delete all events > Show success message and close dialog box
 - Don't start searching for URL vulernabilites when TextInput is empty
+- Airplane mode event > app crashes on api 31, 32, 33
 - UI improvements > Not symmetric..
 
 
