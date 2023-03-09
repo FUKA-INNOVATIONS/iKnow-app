@@ -1,5 +1,6 @@
 package com.fuka.iknow.screens
 
+import CustomDropdownMenu
 import android.app.Application
 import android.util.Log
 import androidx.compose.foundation.background
@@ -65,6 +66,8 @@ fun HomeScreen() {
                 Text(text = "All")
             }
         }
+
+        Row(modifier = Modifier.height(50.dp)) { CustomDropdownMenu(eventTitles = listOf<String>("First", "Second", "Third")) }
 
 
         Scaffold(

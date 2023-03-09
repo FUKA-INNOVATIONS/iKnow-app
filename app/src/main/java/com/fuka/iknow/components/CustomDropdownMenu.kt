@@ -15,7 +15,7 @@ import androidx.compose.ui.text.style.TextAlign
 
 @Composable
 
-fun CustomDropdownMenu() {
+fun CustomDropdownMenu(eventTitles: List<String>) {
     var expanded by remember { mutableStateOf(false) }
 
     Box(modifier = Modifier.fillMaxSize().wrapContentSize(Alignment.TopEnd)) {
