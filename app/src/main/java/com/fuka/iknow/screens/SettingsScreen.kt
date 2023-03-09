@@ -11,6 +11,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -56,11 +57,11 @@ fun DeleteConfirmation(
     deleteButtonColor: Color = Color(0xFFFF0000),
     cancelButtonColor: Color = Color(0xFF35898F),
     titleTextStyle: TextStyle = TextStyle(
-        color = Color.Black.copy(alpha = 0.87f),
+        color = MaterialTheme.colorScheme.primary,
         fontSize = 20.sp
     ),
     messageTextStyle: TextStyle = TextStyle(
-        color = Color.Black.copy(alpha = 0.95f),
+        color = MaterialTheme.colorScheme.primary,
         fontSize = 16.sp,
         lineHeight = 22.sp
     ),
