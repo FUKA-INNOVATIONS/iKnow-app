@@ -1,3 +1,63 @@
 <resources>
     <string name="app_name">iKnow</string>
+
+    <!-- Navigation -->
+    <string name="events_tab">Events</string>
+    <string name="URLCheck_tab">URLCheck</string>
+    <string name="settings_tab">Settings</string>
+
+    <!-- Navigation content description -->
+    <string name="home_screen_navigation_icon">Home screen navigation icon</string>
+    <string name="url_check_screen_navigation_icon">Search screen navigation icon</string>
+    <string name="settings_screen_navigation_icon">Settings navigation icon</string>
+    <!-- TODO: Update -->
+
+    <!-- Airplane Broadcast Receiver -->
+    <string name="tag">iKnow-app</string>
+    <string name="airplane_mode_changed_notification">Airplane mode changed</string>
+    <string name="action">Action: </string>
+    <string name="uri">URI: </string>
+
+    <!-- Airplane Broadcast Receiver content description -->
+    <!-- TODO: Update -->
+
+    <!-- LoginScreen -->
+    <string name="authenticate">Authenticate</string>
+    <string name="biometric_auth_title">Biometric login for iKnow</string>
+    <string name="biometric_auth_description">Authenticate with your fingerprint</string>
+    <string name="authentication_success">Authentication Succeeded</string>
+    <string name="authentication_error">Authentication Error code: </string>
+    <string name="cancel_authentication">Cancel</string>
+    <string name="authentication_cancelled">Authentication Cancelled</string>
+    <string name="authentication_cancelled_signal">Authentication Cancelled Signal</string>
+
+    <!-- LoginScreen content description -->
+    <!-- TODO: Update -->
+
+    <!-- EventsScreen -->
+    <string name="airplane">Airplane</string>
+    <string name="battery">Battery</string>
+    <string name="wifi_state">Wifi state</string>
+    <string name="all">All</string>
+
+    <!-- EventsScreen content description -->
+    <string name="airplane_mode_event_icon_deletion">Delete Airplane mode event icon</string>
+    <!-- TODO: Update -->
+
+    <!-- URLCheckScreen -->
+    <string name="url_textField_label">Place the URL you want to check here</string>
+    <string name="url_submit_button">Check URL</string>
+
+    <!-- URLCheckScreen content description -->
+    <!-- TODO: Update -->
+
+    <!-- SettingsScreen -->
+    <string name="delete_events_button">Delete events</string>
+    <string name="deletion_confirmation_button">Delete</string>
+    <string name="cancel_deletion_button">Cancel</string>
+    <string name="delete_events_title">Delete events?</string>
+    <string name="delete_events_description">Are you sure you want to delete events?</string>
+
+    <!-- SettingsScreen content description -->
+    <!-- TODO: Update -->
 </resources>
