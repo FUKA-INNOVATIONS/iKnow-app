@@ -38,11 +38,12 @@ class MainActivity : ComponentActivity() {
     private lateinit var brWifiState: BroadcastReceiver
     private lateinit var brWifiId: BroadcastReceiver
     private var cancellationSignal: CancellationSignal? = null
+    private lateinit var mContext: Context
 
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        mContext = this
         setContent {
             IKnowTheme {
                 Surface(color = MaterialTheme.colorScheme.background) {
@@ -57,7 +58,7 @@ class MainActivity : ComponentActivity() {
         object : android.hardware.biometrics.BiometricPrompt.AuthenticationCallback() {
             override fun onAuthenticationSucceeded(result: android.hardware.biometrics.BiometricPrompt.AuthenticationResult?) {
                 super.onAuthenticationSucceeded(result)
-                Toast.makeText(this@MainActivity, "Authentication Succeeded", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@MainActivity, getText(R.string.authentication_success), Toast.LENGTH_SHORT).show()
                 setContent {
                     IKnowTheme {
                         NavigationPage()
@@ -67,7 +68,7 @@ class MainActivity : ComponentActivity() {
 
             override fun onAuthenticationError(errorCode: Int, errString: CharSequence?) {
                 super.onAuthenticationError(errorCode, errString)
-                Toast.makeText(this@MainActivity, "Authentication Error code: $errorCode", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@MainActivity, "${getText(R.string.authentication_error)}$errorCode", Toast.LENGTH_SHORT).show()
             }
 
             override fun onAuthenticationFailed() {
@@ -98,11 +99,11 @@ class MainActivity : ComponentActivity() {
         if (checkBiometricSupport()) {
             val biometricPrompt = android.hardware.biometrics.BiometricPrompt.Builder(this)
                 .apply {
-                    setTitle("Biometric login for iKnow") //todo add string
-                    setSubtitle("Authenticate with your fingerprint")
+                    setTitle(getText(R.string.biometric_auth_title))
+                    setSubtitle(getText(R.string.biometric_auth_description))
                     setConfirmationRequired(false)
-                    setNegativeButton("Cancel", mainExecutor, { _, _, ->
-                        Toast.makeText(this@MainActivity, "Authentication Cancelled", Toast.LENGTH_SHORT).show()
+                    setNegativeButton(getText(R.string.cancel_authentication), mainExecutor, { _, _, ->
+                        Toast.makeText(this@MainActivity, getText(R.string.authentication_cancelled), Toast.LENGTH_SHORT).show()
                     })
                 }.build()
             biometricPrompt.authenticate(getCancellationSignal(), mainExecutor, authenticationCallback)
@@ -112,7 +113,7 @@ class MainActivity : ComponentActivity() {
     private fun getCancellationSignal(): CancellationSignal {
         cancellationSignal = CancellationSignal()
         cancellationSignal?.setOnCancelListener {
-            Toast.makeText(this, "Authentication Cancelled Signal", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getText(R.string.authentication_cancelled_signal), Toast.LENGTH_SHORT).show()
         }
 
         return cancellationSignal as CancellationSignal
@@ -139,7 +140,6 @@ class MainActivity : ComponentActivity() {
         ContextCompat.registerReceiver(this, brBattery, filterBatteryLow, receiverFlags)
         ContextCompat.registerReceiver(this, brWifiState, filterNetworkStateChanged, receiverFlags)
         ContextCompat.registerReceiver(this, brWifiId, filterNetworkIdChanged, receiverFlags)
-
     }
 
     /*override fun onPause() {

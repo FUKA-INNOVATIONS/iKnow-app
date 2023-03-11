@@ -11,17 +11,20 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
+import com.fuka.iknow.R
 import com.fuka.iknow.ui.theme.IKnowTheme
 import com.fuka.iknow.viewModels.DatabaseViewModel
 
@@ -39,7 +42,7 @@ fun SettingsScreen() {
                 mutableStateOf(false) // Initially dialog is closed
             }
             Button(onClick = {deleteConf = true}) {
-                Text(text = "Delete events", textAlign = TextAlign.Center)
+                Text(text = stringResource(R.string.delete_events_button), textAlign = TextAlign.Center)
             }
             if (deleteConf) {
                 DeleteConfirmation() {
@@ -56,11 +59,11 @@ fun DeleteConfirmation(
     deleteButtonColor: Color = Color(0xFFFF0000),
     cancelButtonColor: Color = Color(0xFF35898F),
     titleTextStyle: TextStyle = TextStyle(
-        color = Color.Black.copy(alpha = 0.87f),
+        color = MaterialTheme.colorScheme.primary,
         fontSize = 20.sp
     ),
     messageTextStyle: TextStyle = TextStyle(
-        color = Color.Black.copy(alpha = 0.95f),
+        color = MaterialTheme.colorScheme.primary,
         fontSize = 16.sp,
         lineHeight = 22.sp
     ),
@@ -103,7 +106,7 @@ fun DeleteConfirmation(
                     )
                 ) {
                     Text(
-                        text = "Delete Events?",
+                        text = stringResource(R.string.delete_events_title),
                         textAlign = TextAlign.Center,
                         style = titleTextStyle
                     )
@@ -113,7 +116,7 @@ fun DeleteConfirmation(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(top = 16.dp, bottom = 20.dp),
-                    text = "Are you sure you want to delete events?",
+                    text = stringResource(R.string.delete_events_description),
                     style = messageTextStyle
                 )
 
@@ -133,7 +136,11 @@ fun DeleteConfirmation(
                                 interactionSource = interactionSource
                             ) {
                                 Toast
-                                    .makeText(context, "Cancel", Toast.LENGTH_SHORT)
+                                    .makeText(
+                                        context,
+                                        (R.string.cancel_deletion_button),
+                                        Toast.LENGTH_SHORT
+                                    )
                                     .show()
                                 onDismiss()
                             }
@@ -145,7 +152,7 @@ fun DeleteConfirmation(
                             .padding(top = 6.dp, bottom = 8.dp, start = 24.dp, end = 24.dp),
                     ) {
                         Text(
-                            text = "Cancel",
+                            text = stringResource(R.string.cancel_deletion_button),
                             style = buttonTextStyle,
                             color = cancelButtonColor
                         )
@@ -160,7 +167,11 @@ fun DeleteConfirmation(
                                 interactionSource = interactionSource
                             ) {
                                 Toast
-                                    .makeText(context, "Delete", Toast.LENGTH_SHORT)
+                                    .makeText(
+                                        context,
+                                        R.string.deletion_confirmation_button,
+                                        Toast.LENGTH_SHORT
+                                    )
                                     .show()
                                 onDismiss()
                             }
@@ -171,7 +182,7 @@ fun DeleteConfirmation(
                             .padding(top = 6.dp, bottom = 8.dp, start = 24.dp, end = 24.dp),
                     ) {
                         Text(
-                            text = "Delete",
+                            text = stringResource(R.string.deletion_confirmation_button),
                             style = buttonTextStyle,
                             color = Color.White,
                             modifier = Modifier.clickable { viewModel.deleteAllBroadcastActions() }
