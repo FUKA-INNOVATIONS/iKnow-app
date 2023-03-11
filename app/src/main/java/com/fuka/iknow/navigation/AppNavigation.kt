@@ -8,6 +8,7 @@ import androidx.navigation.navigation
 import com.fuka.iknow.screens.HomeScreen
 import com.fuka.iknow.screens.SettingsScreen
 import com.fuka.iknow.screens.URLCheckerScreen
+import androidx.compose.ui.res.stringResource
 
 @Composable
 fun AppNavigation(navController: NavHostController) {

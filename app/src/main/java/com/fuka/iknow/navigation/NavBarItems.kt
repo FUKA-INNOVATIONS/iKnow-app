@@ -3,6 +3,7 @@ package com.fuka.iknow.navigation
 import com.fuka.iknow.R
 
 object NavBarItems {
+
     val BarItems = listOf(
         BarItem(
             title = "Events",

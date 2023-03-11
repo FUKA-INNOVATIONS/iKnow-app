@@ -6,6 +6,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.airbnb.lottie.compose.*
@@ -88,7 +89,7 @@ fun URLCheckerScreen() {
         TextField(
             value = urlValue,
             onValueChange = { urlValue = it },
-            label = { Text("Place the URL you want to check here") },
+            label = { Text(stringResource(R.string.url_textField_label)) },
             maxLines = 1
         )
 
@@ -102,7 +103,7 @@ fun URLCheckerScreen() {
             }
             Log.d(TAG, "matchCount COUNT onClick -> $matchCount")
         }) {
-            Text(text = "Check url", textAlign = TextAlign.Center)
+            Text(text = stringResource(R.string.url_submit_button), textAlign = TextAlign.Center)
         }
 
         Spacer(modifier = Modifier.size(30.dp))
