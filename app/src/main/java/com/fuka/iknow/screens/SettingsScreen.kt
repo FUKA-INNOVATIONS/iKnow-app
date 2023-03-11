@@ -26,7 +26,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import com.fuka.iknow.R
 import com.fuka.iknow.ui.theme.IKnowTheme
-import com.fuka.iknow.viewModels.DatabaseViewModel
+import com.fuka.iknow.viewModels.EventViewModel
 
 @Composable
 fun SettingsScreen() {
@@ -73,7 +73,7 @@ fun DeleteConfirmation(
     onDismiss: () -> Unit
 ) {
     val context = LocalContext.current.applicationContext
-    val viewModel = DatabaseViewModel(context as Application)
+    val viewModel = EventViewModel(context as Application)
 
     val interactionSource = remember {
         MutableInteractionSource()

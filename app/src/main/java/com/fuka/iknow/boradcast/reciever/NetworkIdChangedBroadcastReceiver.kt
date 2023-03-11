@@ -5,7 +5,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.util.Log
-import com.fuka.iknow.viewModels.DatabaseViewModel
+import com.fuka.iknow.viewModels.EventViewModel
 
 class NetworkIdChangedBroadcastReceiver: BroadcastReceiver() {
 
@@ -13,7 +13,7 @@ class NetworkIdChangedBroadcastReceiver: BroadcastReceiver() {
         Log.d(TAG, "NetworkIdChangedBroadcastReceiver > ${intent.action}")
         Log.d(TAG, "NetworkIdChangedBroadcastReceiver > ${intent.extras}")
 
-        val viewModel = DatabaseViewModel(context.applicationContext as Application)
+        val viewModel = EventViewModel(context.applicationContext as Application)
         viewModel.addBroadcastAction(intent.extras.toString(), "WifiIdChanged", intent.hashCode())
 
     }

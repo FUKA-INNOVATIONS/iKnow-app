@@ -1,6 +1,5 @@
 package com.fuka.iknow.api.safeBrowsingLookup
 
-import com.fuka.iknow.BuildConfig
 import com.fuka.iknow.api.safeBrowsingLookup.interceptors.RequestInterceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit

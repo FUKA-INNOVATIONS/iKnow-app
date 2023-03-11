@@ -13,6 +13,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 
 
+/*
+* Korvaa tapahtumien filteröinti painikkeet
+* */
+
 @Composable
 
 fun CustomDropdownMenu(eventTitles: List<String>) {

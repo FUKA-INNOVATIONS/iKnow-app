@@ -8,25 +8,14 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavGraph.Companion.findStartDestination
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
-import androidx.navigation.navigation
-import androidx.navigation.navigation
 import com.fuka.iknow.R
-import com.fuka.iknow.screens.HomeScreen
-import com.fuka.iknow.screens.SettingsScreen
-import com.fuka.iknow.screens.URLCheckerScreen
-import com.fuka.iknow.viewModels.DatabaseViewModel
 import androidx.compose.ui.res.stringResource
 
 

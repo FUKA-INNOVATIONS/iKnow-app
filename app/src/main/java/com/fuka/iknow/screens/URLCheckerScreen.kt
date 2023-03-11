@@ -17,9 +17,7 @@ import com.fuka.iknow.api.safeBrowsingLookup.objects.request.Client
 import com.fuka.iknow.api.safeBrowsingLookup.objects.request.LookupObject
 import com.fuka.iknow.api.safeBrowsingLookup.objects.request.ThreatEntry
 import com.fuka.iknow.api.safeBrowsingLookup.objects.request.ThreatInfo
-import com.fuka.iknow.api.safeBrowsingLookup.objects.response.ResponseModel
 import com.fuka.iknow.boradcast.reciever.TAG
-import com.fuka.iknow.ui.theme.IKnowTheme
 import kotlinx.coroutines.*
 
 @OptIn(ExperimentalMaterial3Api::class)

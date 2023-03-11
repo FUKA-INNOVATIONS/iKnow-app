@@ -5,13 +5,13 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.util.Log
-import com.fuka.iknow.viewModels.DatabaseViewModel
+import com.fuka.iknow.viewModels.EventViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class BroadcastActionNotificationReceiver: BroadcastReceiver() {
-    val viewModel = DatabaseViewModel(Application())
+    val viewModel = EventViewModel(Application())
 
     override fun onReceive(context: Context, intent: Intent?) {
 

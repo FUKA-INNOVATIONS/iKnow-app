@@ -1,30 +1,19 @@
 package com.fuka.iknow.viewModels
 
 import android.app.Application
-import android.content.Context
 import android.util.Log
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.lifecycle.*
-import com.fuka.iknow.data.database.dao.BroadcastActionDao
-
 import com.fuka.iknow.data.database.dataBase.iKnowDatabase;
 import com.fuka.iknow.data.database.model.BroadcastAction;
-import com.fuka.iknow.data.database.repository.BroadcastActionRepository
-import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
-import kotlinx.coroutines.CoroutineScope
-
 import java.time.Instant;
 import java.time.ZoneOffset;
-
 import kotlinx.coroutines.Dispatchers;
 import kotlinx.coroutines.launch
 import java.time.format.DateTimeFormatter.ofPattern
-import javax.inject.Inject
 
 
 val TAG = "iKnow-app"
-class DatabaseViewModel(application: Application) : AndroidViewModel(application) {
+class EventViewModel(application: Application) : AndroidViewModel(application) {
 
     private val db = iKnowDatabase.get_iKnowDatabase(application)
 
