@@ -17,9 +17,7 @@ import com.fuka.iknow.api.safeBrowsingLookup.objects.request.Client
 import com.fuka.iknow.api.safeBrowsingLookup.objects.request.LookupObject
 import com.fuka.iknow.api.safeBrowsingLookup.objects.request.ThreatEntry
 import com.fuka.iknow.api.safeBrowsingLookup.objects.request.ThreatInfo
-import com.fuka.iknow.api.safeBrowsingLookup.objects.response.ResponseModel
 import com.fuka.iknow.boradcast.reciever.TAG
-import com.fuka.iknow.ui.theme.IKnowTheme
 import kotlinx.coroutines.*
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -87,6 +85,7 @@ fun URLCheckerScreen() {
         }
 
         TextField(
+            modifier = Modifier.padding(15.dp),
             value = urlValue,
             onValueChange = { urlValue = it },
             label = { Text(stringResource(R.string.url_textField_label)) },
@@ -106,7 +105,7 @@ fun URLCheckerScreen() {
             Text(text = stringResource(R.string.url_submit_button), textAlign = TextAlign.Center)
         }
 
-        Spacer(modifier = Modifier.size(30.dp))
+        //Spacer(modifier = Modifier.size(50.dp))
     }
 
 }

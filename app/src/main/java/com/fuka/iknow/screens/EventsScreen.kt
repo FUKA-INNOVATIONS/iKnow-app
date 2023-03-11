@@ -1,32 +1,21 @@
 package com.fuka.iknow.screens
 
-import CustomDropdownMenu
 import android.app.Application
 import android.util.Log
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.filled.MoreVert
-import androidx.compose.material.icons.outlined.Edit
-import androidx.compose.material.icons.outlined.Email
-import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.fuka.iknow.viewModels.DatabaseViewModel
-import com.fuka.iknow.viewModels.TAG
+import com.fuka.iknow.viewModels.EventViewModel
 import androidx.compose.ui.res.stringResource
 import com.fuka.iknow.R
 
@@ -35,7 +24,7 @@ import com.fuka.iknow.R
 @Composable
 fun HomeScreen() {
     val context = LocalContext.current
-    val viewModel = DatabaseViewModel(context.applicationContext as Application)
+    val viewModel = EventViewModel(context.applicationContext as Application)
     var broadcastActionList = viewModel.getBroadcastActions().observeAsState(listOf())
     var batteryLevelList = viewModel.getBroadcastActionsByType("batteryLow").observeAsState(listOf())
     var airplaneModeList = viewModel.getBroadcastActionsByType("airplaneMode").observeAsState(listOf())
@@ -48,11 +37,14 @@ fun HomeScreen() {
     val wifiBtnActive = if (activeList == wifiStateList) MaterialTheme.colorScheme.inversePrimary else MaterialTheme.colorScheme.onPrimary
     val showAlBtnActive = if (activeList == broadcastActionList) MaterialTheme.colorScheme.inversePrimary else MaterialTheme.colorScheme.onPrimary
 
+    val actionTypes = broadcastActionList.value.map { it.type }.toSet().toList() // get action types
+
 
     Column {
         Row(modifier = Modifier
             .fillMaxWidth()
-            .padding(start = 15.dp, end = 15.dp), horizontalArrangement = Arrangement.SpaceBetween) {
+            .padding(all = 15.dp), horizontalArrangement = Arrangement.SpaceBetween) {
+
             OutlinedButton(onClick = { activeList = airplaneModeList }, colors = ButtonDefaults.buttonColors(contentColor = airplaneBtnActive)) {
                 Text(text = stringResource(R.string.airplane))
             }
@@ -67,9 +59,10 @@ fun HomeScreen() {
             OutlinedButton(onClick = { activeList = broadcastActionList }, colors = ButtonDefaults.buttonColors(contentColor = showAlBtnActive)) {
                 Text(text = stringResource(R.string.all))
             }
+
         }
 
-        Row(modifier = Modifier.height(50.dp)) { CustomDropdownMenu(eventTitles = listOf<String>("First", "Second", "Third")) }
+        //Row(modifier = Modifier.height(50.dp)) { CustomDropdownMenu(eventTitles = listOf<String>("First", "Second", "Third")) }
 
 
         Scaffold(

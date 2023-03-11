@@ -7,17 +7,13 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageManager
-import android.net.wifi.WifiInfo
 import android.net.wifi.WifiManager
-import android.net.wifi.WifiSsid
 import android.os.Build
 import android.os.Bundle
 import android.os.CancellationSignal
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.compose.material3.*
 import androidx.core.app.ActivityCompat
@@ -26,8 +22,6 @@ import com.fuka.iknow.boradcast.reciever.*
 import com.fuka.iknow.navigation.NavigationPage
 import com.fuka.iknow.screens.LoginScreen
 import com.fuka.iknow.ui.theme.IKnowTheme
-import com.fuka.iknow.viewModels.BroadcastActionViewModel
-import com.fuka.iknow.viewModels.DatabaseViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

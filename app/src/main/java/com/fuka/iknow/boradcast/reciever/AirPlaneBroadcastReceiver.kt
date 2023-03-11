@@ -5,12 +5,8 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.util.Log
-import android.widget.Toast
-import com.fuka.iknow.data.database.dataBase.iKnowDatabase
 import com.fuka.iknow.service.BroadcastActionNotificationService
-import com.fuka.iknow.viewModels.DatabaseViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
-import javax.inject.Inject
+import com.fuka.iknow.viewModels.EventViewModel
 
 val TAG = "iKnow-app"
 class AirPlaneBroadcastReceiver: BroadcastReceiver() {
@@ -21,7 +17,7 @@ class AirPlaneBroadcastReceiver: BroadcastReceiver() {
         val service = BroadcastActionNotificationService(context)
         service.showNotification(33, "Airplane mode changed", "Action: ${intent.action}", intent.hashCode())
 
-        val viewModel = DatabaseViewModel(context.applicationContext as Application)
+        val viewModel = EventViewModel(context.applicationContext as Application)
         viewModel.addBroadcastAction(intent.extras.toString(), "airplaneMode", intent.hashCode())
 
         Log.d(TAG, "intent: $intent")
