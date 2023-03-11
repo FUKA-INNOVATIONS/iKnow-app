@@ -86,6 +86,7 @@ fun URLCheckerScreen() {
         }
 
         TextField(
+            modifier = Modifier.padding(15.dp),
             value = urlValue,
             onValueChange = { urlValue = it },
             label = { Text("Place the URL you want to check here") },
@@ -105,7 +106,7 @@ fun URLCheckerScreen() {
             Text(text = "Check url", textAlign = TextAlign.Center)
         }
 
-        Spacer(modifier = Modifier.size(30.dp))
+        //Spacer(modifier = Modifier.size(50.dp))
     }
 
 }

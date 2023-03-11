@@ -67,7 +67,7 @@ fun HomeScreen() {
             }
         }
 
-        Row(modifier = Modifier.height(50.dp)) { CustomDropdownMenu(eventTitles = listOf<String>("First", "Second", "Third")) }
+        //Row(modifier = Modifier.height(50.dp)) { CustomDropdownMenu(eventTitles = listOf<String>("First", "Second", "Third")) }
 
 
         Scaffold(
