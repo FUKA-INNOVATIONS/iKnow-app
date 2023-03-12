@@ -28,6 +28,7 @@ Known buggs
 - Airplane mode event > app crashes on api 31, 32, 33
 - UI improvements > Not symmetric..
 - Reset URL check animation on empty text filed after a search
+- Warning user if no network connection on URL check
 
 
 Theme and usability
