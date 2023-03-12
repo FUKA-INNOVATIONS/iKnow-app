@@ -3,7 +3,7 @@ Adroid app that keeps track of important privacy and cyber security related even
 
 Notes to techers
 - As discussed with Peter, there was no sence to use repository layer although it is added and can be found under data/databse/repository folder.
-- Fot best experience and testing purposes use API 30
+- For best experience and testing purposes use API 30
 
 Install
 
