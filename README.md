@@ -78,6 +78,7 @@ SBL_API_KEY="YOUR_API_KEY"
 - Give user a choice to select the way they want to authenticate with
 - Allow user to choose which broadcast events are captured 
 - UI improvements
+- Instructions / how to use the app
 - And more...
 ## Screenshots
 
