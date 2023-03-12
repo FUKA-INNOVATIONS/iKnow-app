@@ -14,7 +14,7 @@ Install
 
 Test URLs
 
-- Vulnerable: estsafebrowsing.appspot.com/apiv4/IOS/MALWARE/URL/
+- Vulnerable: https://testsafebrowsing.appspot.com/apiv4/IOS/MALWARE/URL/
 
 - Safe: metropolia.fi
 
