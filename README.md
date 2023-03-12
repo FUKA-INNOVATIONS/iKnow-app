@@ -4,6 +4,7 @@ Adroid app that keeps track of important privacy and cyber security related even
 Notes to techers
 - As discussed with Peter, there was no sence to use repository layer although it is added and can be found under data/databse/repository folder.
 - For best experience and testing purposes use API 30
+- Application has fullfilledall all requirements === 5 starts!
 
 Install
 
@@ -17,6 +18,12 @@ Test URLs
 - Vulnerable: https://testsafebrowsing.appspot.com/apiv4/IOS/MALWARE/URL/
 
 - Safe: metropolia.fi
+
+
+
+Use cases / how to?
+
+
 
 
 Known buggs
