@@ -77,27 +77,35 @@ SBL_API_KEY="YOUR_API_KEY"
 ## Screenshots
 
 **Login screen**
+
 ![StartScreen](https://user-images.githubusercontent.com/93869294/224556683-186a0042-89c1-4d63-a2b7-29d33c1feb47.png)
 
 **Authentication popup**
+
 ![StartScreen_authenticationDialog](https://user-images.githubusercontent.com/93869294/224556780-889e5d1e-4c9b-4fde-a298-8a8327802730.png)
 
 **Events screen**
+
 ![Events_All](https://user-images.githubusercontent.com/93869294/224556830-db34a0de-f46e-4aa3-84b8-660e60ca2d24.png)
 
 **Notification of a new detected event**
+
 ![Notification_MarkAsChecked](https://user-images.githubusercontent.com/93869294/224556860-dd7fa254-3caa-4722-aca9-15143b6deeab.png)
 
 **Settings screen**
+
 ![Settings](https://user-images.githubusercontent.com/93869294/224556894-1f4de6a2-236e-4b05-b7e1-d14bb632646b.png)
 
 **Delete events confimation popup**
+
 ![Settings_deleteBtnPressed](https://user-images.githubusercontent.com/93869294/224556902-dd5a7b37-fa1f-4a2e-9f3d-6bf95f8932ab.png)
 
 **Safe URL address checked**
+
 ![URL_safe](https://user-images.githubusercontent.com/93869294/224556957-38834777-e8d6-45da-9262-0b07abfc602a.png)
 
 **Vulnerable URL address checked**
+
 ![URL_unSafe](https://user-images.githubusercontent.com/93869294/224556964-86c418f2-097c-427a-a4f4-edae14cfb149.png)
 
 
