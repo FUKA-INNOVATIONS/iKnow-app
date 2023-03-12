@@ -75,7 +75,7 @@ SBL_API_KEY="YOUR_API_KEY"
 
 - Frontend for counter of found URL vulnerables
 - Authentication via password
-- Give user choice to select the way they want to authenticate with
+- Give user a choice to select the way they want to authenticate with
 - Allow user to choose which broadcast events are captured 
 - UI improvements
 - And more...
