@@ -27,7 +27,7 @@ Known buggs
 - Don't start searching for URL vulernabilites when TextInput is empty
 - Airplane mode event > app crashes on api 31, 32, 33
 - UI improvements > Not symmetric..
-- Reset URL check animation
+- Reset URL check animation on empty text filed after a search
 
 
 Theme and usability
