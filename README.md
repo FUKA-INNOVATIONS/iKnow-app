@@ -9,7 +9,8 @@ Install
 
 - apikey.properties file
 
-
+ >>> Enable Fingerprint features in device settings
+ >>> App compatible Version <= 30
 
 Known buggs
 
