@@ -19,8 +19,8 @@ import com.fuka.iknow.ui.theme.IKnowTheme
 /*
 * Login näkymä
 *
-* Käyttäjä on pakotettu käyttämään sormenjäki tunnistina kirjautukseen sovellukseen ( max API v. 30) muuten sovellus mahdollisesti kaatuu > tiedostettu bugi
-* Jatkokehityksessä lisätään pinKoodilla kurjautumita ja tarkistetaan tukeeko käyttäjän laite sormenjäljellä tunnistautumista
+* Käyttäjä on pakotettu käyttämään sormenjäki tunnistina kirjautukseen sovellukseen
+* Jatkokehityksessä lisätään pin koodi kurjautuminen
 *
 *   HUOM !! Ennen kuin käytät sovellusta
 *   1. Siirry puhelimen asetuksiin

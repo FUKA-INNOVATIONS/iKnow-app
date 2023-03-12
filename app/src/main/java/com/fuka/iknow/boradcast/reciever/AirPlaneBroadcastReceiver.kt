@@ -18,6 +18,9 @@ val TAG = "iKnow-app"
 * 3. Tallenna tapahtuma ROOM tietokantaan
 * 4. Mahdollisesti > Näytä Toast ilmoitus käyttäjälle, tällä hetkellä ei ole kytketty päälle (rivi 45)
 *
+*   HUOM!
+*   Sovellus mahdollisesti kaatuu jos API versio > 30 (mahdollinen bugi)
+*
 * */
 class AirPlaneBroadcastReceiver: BroadcastReceiver() {
 
