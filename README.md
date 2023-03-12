@@ -13,8 +13,13 @@ Install
  >>> App compatible Version <= 30
 
 
-Vulnerable URLs
+Test URLs
 
+- Vulnerable URL
+estsafebrowsing.appspot.com/apiv4/IOS/MALWARE/URL/
+
+- Safe URL 
+metropolia.fi
 
 
 Known buggs
