@@ -12,6 +12,16 @@ import com.fuka.iknow.R
 import com.fuka.iknow.boradcast.reciever.BroadcastActionNotificationReceiver
 import com.fuka.iknow.boradcast.reciever.TAG
 
+
+
+/*
+*
+* Tämä on vastuussa notifikaation näyttämisestä käyttäjälle
+*
+* */
+
+
+
 class BroadcastActionNotificationService(private val context: Context) {
 
     private val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager

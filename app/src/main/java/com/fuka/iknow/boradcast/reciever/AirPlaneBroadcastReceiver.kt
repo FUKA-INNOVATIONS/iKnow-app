@@ -9,6 +9,16 @@ import com.fuka.iknow.service.BroadcastActionNotificationService
 import com.fuka.iknow.viewModels.EventViewModel
 
 val TAG = "iKnow-app"
+
+/*
+* Mitä luokka tekee ?
+*
+* 1. Vastaanota tieto Lentotilan muuttumisesta
+* 2. Luo ja näytä notifikaatio käyttäjälle
+* 3. Tallenna tapahtuma ROOM tietokantaan
+* 4. Mahdollisesti > Näytä Toast ilmoitus käyttäjälle, tällä hetkellä ei ole kytketty päälle (rivi 45)
+*
+* */
 class AirPlaneBroadcastReceiver: BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {

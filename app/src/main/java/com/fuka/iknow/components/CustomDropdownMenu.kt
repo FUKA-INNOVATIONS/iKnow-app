@@ -15,6 +15,10 @@ import androidx.compose.ui.text.style.TextAlign
 
 /*
 * Korvaa tapahtumien filteröinti painikkeet
+* Tämän oli taroitus korvata nyt käytössä olevat tapahtumafilttereiden painikkeet
+*
+* Siirretään jatkokehitysvaiheeseen.
+*
 * */
 
 @Composable
@@ -31,7 +35,7 @@ fun CustomDropdownMenu(eventTitles: List<String>) {
             onDismissRequest = { expanded = false }
         ) {
             DropdownMenuItem(
-                text = { Text("Edit") },
+                text = { Text("All events") },
                 onClick = { /* Handle edit! */ },
                 leadingIcon = {
                     Icon(
@@ -40,7 +44,7 @@ fun CustomDropdownMenu(eventTitles: List<String>) {
                     )
                 })
             DropdownMenuItem(
-                text = { Text("Settings") },
+                text = { Text("Airplane mode") },
                 onClick = { /* Handle settings! */ },
                 leadingIcon = {
                     Icon(
@@ -50,7 +54,17 @@ fun CustomDropdownMenu(eventTitles: List<String>) {
                 })
             Divider()
             DropdownMenuItem(
-                text = { Text("Send Feedback") },
+                text = { Text("Wifi state") },
+                onClick = { /* Handle settings! */ },
+                leadingIcon = {
+                    Icon(
+                        Icons.Outlined.Settings,
+                        contentDescription = null
+                    )
+                })
+            Divider()
+            DropdownMenuItem(
+                text = { Text("Battery level") },
                 onClick = { /* Handle send feedback! */ },
                 leadingIcon = {
                     Icon(

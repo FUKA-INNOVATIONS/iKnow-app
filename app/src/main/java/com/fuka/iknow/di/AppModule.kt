@@ -14,6 +14,15 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
+
+/**
+ * Hiltin luokka
+ * tässä luodaan instanssit joita halutaan injektoida hiltilla
+ * yleisesti/normaalisti tässä luokassa luodaan instanssit niistä luokasita joiden luonti tapahtuu builder metodien kautta
+ * Kuten opeille kerrottu, oli tuli outoja haasteita ja lopuksi päätettiin siirtämään jatkokehitysvaiheeseen.
+ * */
+
+
 @InstallIn(SingletonComponent::class)
 @Module
 object AppModule {

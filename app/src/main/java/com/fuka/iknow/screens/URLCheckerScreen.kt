@@ -20,6 +20,26 @@ import com.fuka.iknow.api.safeBrowsingLookup.objects.request.ThreatInfo
 import com.fuka.iknow.boradcast.reciever.TAG
 import kotlinx.coroutines.*
 
+
+/*
+* 1. Käyttäjä syöttää verkkoosoitteen
+* 2. Tarkistetaan safeBrowsing API:sta löytyykö kyseinen osoite
+* 3. Käyttäjälle näytetään (animaatio) onko kyseinen osoite turvallinen tai ei
+*
+*
+* Tässä hyödynnetään Googlen API:ta
+* 1. Otetaan käyttäjän syöttämä verkkosoite
+* 2. Tarkistataan seraavat asiat : Uhan tyyppi ja kohdealusta
+* 2.1 Uhantyypit: "MALWARE", "SOCIAL_ENGINEERING", "UNWANTED_SOFTWARE", "THREAT_TYPE_UNSPECIFIED", "POTENTIALLY_HARMFUL_APPLICATION"
+* 2.2 Kohdealustat: "WINDOWS", "LINUX", "ANDROID", "OSX", "IOS", "CHROME"
+*
+*   Tiedostettu bugi / Kluge vai oliko se Klage =D
+*   Hauen jälkeen ja pystyttävä restoida hakua ja niin animaatiotakin, nyt tämä onnistuu siirtymällä toieen näkymään edestakaisin
+*
+* */
+
+
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun URLCheckerScreen() {

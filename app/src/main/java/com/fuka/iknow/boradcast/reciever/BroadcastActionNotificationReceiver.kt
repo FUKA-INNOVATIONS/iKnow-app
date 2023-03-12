@@ -10,6 +10,21 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+
+/*
+* Mitä luokka tekee ?
+*
+* tämä on tarkoitettu lisäämään toiminnallisuutta käyttäjälle näytettyyn ilmoitukseen (ilmoituspalkki)
+* Nyt notifikaatio sisältää painikkeen jnka painamalla tapahtuman sisäinen tila/status päivitetään
+* Tämä näytettiin opettajille viikkopalverissa jonka jälkeen tilaikoni poistettiin tapahtumalistalta
+*
+* 1. VAstaanota tieto totifikaatiopainikkeen painamistsesta
+* 2. Hae kyseinen tapahtuma tietokannasta
+* 3. Päivitä kyseisen tapahtuman tila ROOM tietokannassa
+*
+* */
+
+
 class BroadcastActionNotificationReceiver: BroadcastReceiver() {
     val viewModel = EventViewModel(Application())
 

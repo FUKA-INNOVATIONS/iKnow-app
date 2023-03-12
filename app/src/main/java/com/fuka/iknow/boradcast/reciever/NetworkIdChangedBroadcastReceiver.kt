@@ -7,6 +7,18 @@ import android.content.Intent
 import android.util.Log
 import com.fuka.iknow.viewModels.EventViewModel
 
+
+/*
+* Mitä luokka tekee ?
+*
+* Tämä toiminnallisuus ei nyt ole käytössä
+*
+* 1. Vastaanota tieto Wifi id:n muuttumisesta
+* 2. Tallenna tapahtuma ROOM tietokantaan
+*
+* */
+
+
 class NetworkIdChangedBroadcastReceiver: BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {

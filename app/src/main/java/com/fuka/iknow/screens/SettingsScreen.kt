@@ -29,6 +29,26 @@ import com.fuka.iknow.R
 import com.fuka.iknow.ui.theme.IKnowTheme
 import com.fuka.iknow.viewModels.EventViewModel
 
+
+
+/*
+* Setting näkymä
+*
+* Käyttäjä pystyy postamaan kaikki tapahtumat painamalla poista kaikki pahtuman painikett
+* Käyttäjän on vahvistettava poistoa jolloin häntä varoitetaan ettei poistettuja tapahtumia ei pysty positon jäkeen palauttamaan
+* Kaikki tapahtuamat poistetaan ROOM tietokannasta pysyvästi
+*
+* Jatkokehtiys
+*   1. Käyttäjä valitsee listalta mistä tapahtumista haluaa ilmoituksen ja mitkä talletataan teitokantaan
+*   2. Käyttäjä asettaa/muuttaa Pinkoodun sovelluksen avaamiseen
+*   3. Käyttäjä aktivoi/deaktivoi bio tunnistautumista
+*
+*   ... ja lisää kivoja asioita :)
+*
+* */
+
+
+
 @Composable
 fun SettingsScreen() {
 

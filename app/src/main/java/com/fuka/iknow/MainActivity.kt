@@ -24,6 +24,32 @@ import com.fuka.iknow.screens.LoginScreen
 import com.fuka.iknow.ui.theme.IKnowTheme
 import dagger.hilt.android.AndroidEntryPoint
 
+
+
+
+/*
+*
+* Käyttäjä on pakotettu käyttämään sormenjäki tunnistina kirjautukseen sovellukseen ( max API v. 30) muuten sovellus mahdollisesti kaatuu > tiedostettu bugi
+* Jatkokehityksessä lisätään pinKoodilla kurjautumita ja tarkistetaan tukeeko käyttäjän laite sormenjäljellä tunnistautumista
+*
+*   HUOM !! Ennen kuin käytät sovellusta
+*
+*   1. Siirry puhelimen asetuksiin
+*   2. Laita sormenjälkitunnistin päälle ja rekisterö sellainen omaa sormea tai esmulaattorin sormea käyttäen :)
+*   3. Avaa sovellut ja tunnistausu JA nauti sen tuomasta tuvallisuuden tunteista sekä eduista =D
+*
+*   * Jatkokehtiys > Kofiguroitavissa myös sovelluksen Settings näkymässä
+*   1. Käyttäjä valitsee listalta mistä tapahtumista haluaa ilmoituksen ja mitkä talletataan teitokantaan
+*   2. Käyttäjä asettaa/muuttaa Pinkoodun sovelluksen avaamiseen
+*   3. Käyttäjä aktivoi/deaktivoi bio tunnistautumista
+*
+* */
+
+
+
+
+
+
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 

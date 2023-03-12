@@ -20,6 +20,30 @@ import androidx.compose.ui.res.stringResource
 import com.fuka.iknow.R
 
 
+
+/*
+* Events näkymä
+*
+* Haetaan tahaptumat ROOM tietokannasta
+* Näyttää oletuksena listan kaikista tapahtumista
+* Tapahtumia voidaaan suodata painamalle niihin tarkoitettua painikkeita
+* Käyttäjä on tietoiken mitkä tpahtumat ovat näytöllä ( filtteri painikkeen väri )
+* Halutessaan käyttäjä pystyy postamaan valitsemansa tapahtuman jolloin se poistetaan ROOM tietokannasta pysyvästä
+*
+* Filteröinti korvataan  DropDown valikolla jatkokehtysvaiheessa jolloin valikon sisältö on dynaaminen
+* sekä lisätään järkestämis vaihtoehtoja esim. päivämäärän/kollonajan/viimeisimmät   mukaan
+*
+*
+*  >>>>     Jos haluat testata notifikaatiopainikkeen (tilan muutos) toimintaa
+*           1. posita kommentit riveiltä 112-122
+*           2. luo tapahtuma esim. Lentotilan kytkeminen
+*           3. Avaa notifikaatiopalkki ja paina notifikaatiossa olevaa paniketta
+*           4. Palaa sovelluksen Events näkymään niin näet että tapahtuman vasemmalla laidalla oleva ikonin väri on muuttunut
+*/
+
+
+
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen() {
