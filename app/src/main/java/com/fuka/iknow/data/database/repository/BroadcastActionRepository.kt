@@ -7,6 +7,16 @@ import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
+
+
+/*
+* Repo taso
+* Kuten Peterin kanssa keskusteltu, emme nähneet järkeää tämän käyttöönotosta
+* sillä kyseessä olisi aika pitkäli vain koodin duplikointia
+* Teidostamme että edellä mainittu ei päde kaikkiin tilantaisiin ja että hyvin usein repon käyttäminen on järkevää
+*
+* */
+
 class BroadcastActionRepository @Inject constructor(private val broadcastActionDao: BroadcastActionDao) {
 
     suspend fun addBroadcastAction(action: String, type: String) {

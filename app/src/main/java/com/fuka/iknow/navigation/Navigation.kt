@@ -19,6 +19,12 @@ import com.fuka.iknow.R
 import androidx.compose.ui.res.stringResource
 
 
+
+
+// Navigointi logiikka
+// Aktiivina olevan näkymän ikonin väri indiköt missä näkymässä käyttäjä sijaitsee
+
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NavigationPage() {

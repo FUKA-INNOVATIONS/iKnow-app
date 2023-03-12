@@ -13,6 +13,12 @@ import java.time.format.DateTimeFormatter.ofPattern
 
 
 val TAG = "iKnow-app"
+
+/*
+*
+* Jatkokehtysvaiheessa tietokantaoperaatiot tehdään repsitoryn kautta
+* */
+
 class EventViewModel(application: Application) : AndroidViewModel(application) {
 
     private val db = iKnowDatabase.get_iKnowDatabase(application)

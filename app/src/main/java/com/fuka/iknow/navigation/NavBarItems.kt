@@ -2,6 +2,10 @@ package com.fuka.iknow.navigation
 
 import com.fuka.iknow.R
 
+
+// Lista buttomNavin painikkeista
+
+
 object NavBarItems {
 
     val BarItems = listOf(

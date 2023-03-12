@@ -7,6 +7,16 @@ import android.content.Intent
 import android.util.Log
 import com.fuka.iknow.viewModels.EventViewModel
 
+
+/*
+* Mitä luokka tekee ?
+*
+* 1. Vastaanota tieto akun alhaisesta tasosta
+* 2. Tallenna tapahtuma ROOM tietokantaan
+*
+* */
+
+
 class BatteryLevelBroadcastReceiver: BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {

@@ -15,6 +15,15 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.ViewCompat
 
+
+/*
+* Mukautettu Material 3 teema
+* Luotu Meterial 3:n verkkosivulla kuten tunnilla Ullan kanssa tehtiin
+* Sovellus tukee Light/Dark teemoja
+* */
+
+
+
 private val LightColors = lightColorScheme(
     primary = md_theme_light_primary,
     onPrimary = md_theme_light_onPrimary,
