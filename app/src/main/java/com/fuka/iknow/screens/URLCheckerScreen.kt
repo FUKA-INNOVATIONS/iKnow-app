@@ -26,31 +26,37 @@ fun URLCheckerScreen() {
     var urlValue by remember { mutableStateOf("") }
     var matchCount by remember { mutableStateOf<Int?>(null) }
 
+    // Select animation
     val noSearchAnimation by rememberLottieComposition(
         LottieCompositionSpec
             .RawRes(R.raw.secure)
     )
 
+    // Animation loop
     val noSearchAnimationProgress by animateLottieCompositionAsState(
         noSearchAnimation,
         iterations = LottieConstants.IterateForever
     )
 
+    // Select animation
     val safeSearchAnimation by rememberLottieComposition(
         LottieCompositionSpec
             .RawRes(R.raw.secure2)
     )
 
+    // Make animation play only once
     val safeSearchAnimationProgress by animateLottieCompositionAsState(
         noSearchAnimation,
         iterations = 1
     )
 
+    // Select animation
     val notSafeSearchAnimation by rememberLottieComposition(
         LottieCompositionSpec
             .RawRes(R.raw.warning)
     )
 
+    // Make animation play only once
     val notSafeSearchAnimationProgress by animateLottieCompositionAsState(
         noSearchAnimation,
         iterations = 1

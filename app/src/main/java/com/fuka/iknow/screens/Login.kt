@@ -18,10 +18,13 @@ import com.fuka.iknow.ui.theme.IKnowTheme
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginScreen(onClick: () -> Unit) {
+    // Select animation
     val composition by rememberLottieComposition(
         LottieCompositionSpec
             .RawRes(R.raw.animation)
     )
+
+    // Animation loop
     val progress by animateLottieCompositionAsState(
         composition,
         iterations = LottieConstants.IterateForever
@@ -53,6 +56,7 @@ fun LoginScreen(onClick: () -> Unit) {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            // Display lottie animation
             LottieAnimation(
                 composition,
                 progress,

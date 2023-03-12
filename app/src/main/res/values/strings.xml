@@ -52,11 +52,14 @@
     <!-- TODO: Update -->
 
     <!-- SettingsScreen -->
-    <string name="delete_events_button">Delete events</string>
+    <string name="delete_events_button">Delete all events</string>
     <string name="deletion_confirmation_button">Delete</string>
+    <string name="delete_events_toast">All events deleted</string>
     <string name="cancel_deletion_button">Cancel</string>
+    <string name="cancel_deletion_toast">Canceled</string>
     <string name="delete_events_title">Delete events?</string>
-    <string name="delete_events_description">Are you sure you want to delete events?</string>
+    <string name="delete_events_description1">Are you sure you want to delete all events?</string>
+    <string name="delete_events_description2">This action cannot be withdrawn!</string>
 
     <!-- SettingsScreen content description -->
     <!-- TODO: Update -->

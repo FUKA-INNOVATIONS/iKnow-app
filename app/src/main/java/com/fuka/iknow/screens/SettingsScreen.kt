@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
+import com.airbnb.lottie.compose.*
 import com.fuka.iknow.R
 import com.fuka.iknow.ui.theme.IKnowTheme
 import com.fuka.iknow.viewModels.EventViewModel
@@ -31,19 +32,41 @@ import com.fuka.iknow.viewModels.EventViewModel
 @Composable
 fun SettingsScreen() {
 
+    // Select animation
+    val composition by rememberLottieComposition(
+        LottieCompositionSpec
+            .RawRes(R.raw.settings)
+    )
+
+    // Animation loop
+    val progress by animateLottieCompositionAsState(
+        composition,
+        iterations = LottieConstants.IterateForever
+    )
+    
     IKnowTheme {
         Column (
             modifier = Modifier.fillMaxSize(),
-            //verticalArrangement = Arrangement.Center,
+            verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Spacer(modifier = Modifier.size(30.dp))
             var deleteConf by remember {
                 mutableStateOf(false) // Initially dialog is closed
             }
+
+            // Display lottie animation
+            LottieAnimation(
+                composition,
+                progress,
+                modifier = Modifier.size(400.dp)
+            )
+
+            Spacer(modifier = Modifier.size(30.dp))
+
             Button(onClick = {deleteConf = true}) {
                 Text(text = stringResource(R.string.delete_events_button), textAlign = TextAlign.Center)
             }
+
             if (deleteConf) {
                 DeleteConfirmation() {
                     deleteConf = false
@@ -53,6 +76,7 @@ fun SettingsScreen() {
     }
 }
 
+// Delete button confirmation screen and function
 @Composable
 fun DeleteConfirmation(
     cornerRadius: Dp = 12.dp,
@@ -116,7 +140,15 @@ fun DeleteConfirmation(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(top = 16.dp, bottom = 20.dp),
-                    text = stringResource(R.string.delete_events_description),
+                    text = stringResource(R.string.delete_events_description1),
+                    style = messageTextStyle
+                )
+
+                Text(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 16.dp, bottom = 20.dp),
+                    text = stringResource(R.string.delete_events_description2),
                     style = messageTextStyle
                 )
 
@@ -138,7 +170,7 @@ fun DeleteConfirmation(
                                 Toast
                                     .makeText(
                                         context,
-                                        (R.string.cancel_deletion_button),
+                                        (R.string.cancel_deletion_toast),
                                         Toast.LENGTH_SHORT
                                     )
                                     .show()
@@ -169,10 +201,11 @@ fun DeleteConfirmation(
                                 Toast
                                     .makeText(
                                         context,
-                                        R.string.deletion_confirmation_button,
+                                        R.string.delete_events_toast,
                                         Toast.LENGTH_SHORT
                                     )
                                     .show()
+                                viewModel.deleteAllBroadcastActions()
                                 onDismiss()
                             }
                             .background(
@@ -185,7 +218,6 @@ fun DeleteConfirmation(
                             text = stringResource(R.string.deletion_confirmation_button),
                             style = buttonTextStyle,
                             color = Color.White,
-                            modifier = Modifier.clickable { viewModel.deleteAllBroadcastActions() }
                         )
                     }
 

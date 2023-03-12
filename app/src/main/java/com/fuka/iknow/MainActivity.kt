@@ -47,6 +47,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    // Biometric handler for success and errors
     private val authenticationCallback: android.hardware.biometrics.BiometricPrompt.AuthenticationCallback =
         @RequiresApi(Build.VERSION_CODES.P)
         object : android.hardware.biometrics.BiometricPrompt.AuthenticationCallback() {
@@ -74,6 +75,7 @@ class MainActivity : ComponentActivity() {
             }
         }
 
+    // Check Biometric support
     @RequiresApi(Build.VERSION_CODES.M)
     private fun checkBiometricSupport(): Boolean {
         val keyGuardManager = getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
@@ -88,6 +90,7 @@ class MainActivity : ComponentActivity() {
         return packageManager.hasSystemFeature(PackageManager.FEATURE_FINGERPRINT)
     }
 
+    // Creates biometric prompt screen
     @RequiresApi(Build.VERSION_CODES.Q)
     private fun launchBiometric() {
         if (checkBiometricSupport()) {
@@ -96,14 +99,19 @@ class MainActivity : ComponentActivity() {
                     setTitle(getText(R.string.biometric_auth_title))
                     setSubtitle(getText(R.string.biometric_auth_description))
                     setConfirmationRequired(false)
-                    setNegativeButton(getText(R.string.cancel_authentication), mainExecutor, { _, _, ->
-                        Toast.makeText(this@MainActivity, getText(R.string.authentication_cancelled), Toast.LENGTH_SHORT).show()
-                    })
+                    setNegativeButton(getText(R.string.cancel_authentication), mainExecutor) { _, _, ->
+                        Toast.makeText(
+                            this@MainActivity,
+                            getText(R.string.authentication_cancelled),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 }.build()
             biometricPrompt.authenticate(getCancellationSignal(), mainExecutor, authenticationCallback)
         }
     }
 
+    //Biometric cancellation
     private fun getCancellationSignal(): CancellationSignal {
         cancellationSignal = CancellationSignal()
         cancellationSignal?.setOnCancelListener {
