@@ -12,6 +12,11 @@ Install
  >>> Enable Fingerprint features in device settings
  >>> App compatible Version <= 30
 
+
+Vulnerable URLs
+
+
+
 Known buggs
 
 - User must enable fingerprin inorder to use the app
