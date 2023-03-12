@@ -8,9 +8,8 @@ Notes to techers
 Install
 
 - apikey.properties file
-
--- Enable Fingerprint features in device settings
--- App compatible Version <= 30
+- Enable Fingerprint features in device settings
+- App compatible Version <= 30
 
 
 Test URLs
