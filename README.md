@@ -23,6 +23,11 @@ Known buggs
 - Reset URL check animation
 
 
+Theme and usability
+- Custom Material 3 theme
+- Supports light and dark themes
+- Description for screan readers 
+
 Other > functionality ready > add to UI
 - Show foud vulernabilites' counter
 
